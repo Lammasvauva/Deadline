@@ -12,5 +12,8 @@ public class MainActivity extends AppCompatActivity {
 
         //This is a commit from computer C
         //This is now develop branch
+
+        //Fixing bug blaa blaa blaa
+        //commit 2
     }
 }
