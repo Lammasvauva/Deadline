@@ -10,12 +10,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //This is a commit from computer C
-        //This is now develop branch
-
         //Fixing bug blaa blaa blaa
         //commit 2
 
-        //This is for main menu
+        //This is calendar branch
     }
 }
