@@ -14,5 +14,6 @@ public class MainActivity extends AppCompatActivity {
         //This is now develop branch
 
         //Fixing bug blaa blaa blaa
+        //commit 2
     }
 }
