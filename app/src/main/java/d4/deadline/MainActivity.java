@@ -15,5 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Fixing bug blaa blaa blaa
         //commit 2
+
+        //This is for main menu
     }
 }
