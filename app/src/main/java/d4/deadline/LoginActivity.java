@@ -140,6 +140,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             GoogleSignInAccount account = result.getSignInAccount();
 
             name.setText(account.getDisplayName());
+            Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
+            LoginActivity.this.startActivity(myIntent);
         }
     }
 
