@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         //commit 2
         //This is server
         //Login now works with dummy credentials
-
+        //bluu blaa
 
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
