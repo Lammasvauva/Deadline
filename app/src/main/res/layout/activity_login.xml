@@ -72,8 +72,26 @@
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="138dp"
+                tools:layout_editor_absoluteY="182dp">
+
+
+
+
+            </com.google.android.gms.common.SignInButton>
+            <android.support.v7.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="100dp"
+                tools:layout_editor_absoluteY="100dp" />
 
 
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

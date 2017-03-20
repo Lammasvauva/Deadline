@@ -29,12 +29,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -46,8 +48,13 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, GoogleApiClient.OnConnectionFailedListener, OnClickListener {
 
+    private SignInButton login;
+    private TextView name;
+    private GoogleApiClient googleApiClient;
+    private GoogleSignInOptions googleSignInOptions;
+    private static final int REQUEST_CODE = 100;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -80,6 +87,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+
+        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions).build();
+
+        login = (SignInButton) findViewById(R.id.login);
+        name = (TextView) findViewById(R.id.name);
+
+        login.setSize(SignInButton.SIZE_WIDE);
+        login.setScopes(googleSignInOptions.getScopeArray());
+
+
+        findViewById(R.id.login).setOnClickListener(this);
+
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -107,19 +129,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-
-
     }
 
 
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE){
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            GoogleSignInAccount account = result.getSignInAccount();
 
-
-
-
-
-
-
+            name.setText(account.getDisplayName());
+        }
+    }
 
 
 
@@ -309,6 +331,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.login:
+                signIn();
+                break;
+        }
+    }
+    private void signIn(){
+        Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        startActivityForResult(intent, REQUEST_CODE);
+        googleApiClient.connect();
     }
 
 
