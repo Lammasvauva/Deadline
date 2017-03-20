@@ -91,6 +91,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
+        //kommentti joka on hyvä
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
