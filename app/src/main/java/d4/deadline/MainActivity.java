@@ -1,5 +1,6 @@
 package d4.deadline;
 
+import android.accounts.Account;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -23,15 +24,24 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInOptions gso;
+    public static String nameString = "NO_NAME_FOUND";
+    private TextView user_name;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
         findViewById(R.id.google_logout).setOnClickListener(this);
+        user_name = (TextView)findViewById(R.id.user_name);
+        user_name.setText(nameString);
+
+
+
+
+
         //This is a commit from computer C
         //This is now develop branch
 
@@ -43,7 +53,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
 
+
     }
+
+
+
+
+
 
 
     @Override
@@ -71,4 +87,5 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
     }
+
 }

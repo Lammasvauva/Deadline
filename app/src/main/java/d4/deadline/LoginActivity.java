@@ -54,7 +54,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private TextView name;
     private GoogleApiClient googleApiClient;
     private GoogleSignInOptions googleSignInOptions;
-    private static final int REQUEST_CODE = 100;
+    public static final int REQUEST_CODE = 100;
+    public static String display_name;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -94,6 +96,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         login = (SignInButton) findViewById(R.id.login);
         name = (TextView) findViewById(R.id.name);
+
 
         login.setSize(SignInButton.SIZE_WIDE);
         login.setScopes(googleSignInOptions.getScopeArray());
@@ -140,6 +143,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             GoogleSignInAccount account = result.getSignInAccount();
 
             name.setText(account.getDisplayName());
+            display_name = account.getDisplayName();
+            MainActivity.nameString = account.getDisplayName();
             Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
             LoginActivity.this.startActivity(myIntent);
         }
