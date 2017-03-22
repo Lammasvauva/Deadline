@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".Menu">
+        <activity
+            android:name=".MainMenuNavigation"
+            android:label="@string/title_activity_main_menu_navigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
