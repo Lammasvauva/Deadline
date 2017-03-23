@@ -21,10 +21,10 @@ import d4.deadline.R;
 public class SecondFragment extends Fragment {
 
 
-    private FirstFragment.OnFragmentInteractionListener listener;
+    private SecondFragment.OnFragmentInteractionListener listener;
 
-    public static FirstFragment newInstance() {
-        return new FirstFragment();
+    public static SecondFragment newInstance() {
+        return new SecondFragment();
     }
 
     @Override
@@ -34,14 +34,14 @@ public class SecondFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_first, container, false);
+        return inflater.inflate(R.layout.fragment_second, container, false);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof FirstFragment.OnFragmentInteractionListener) {
-            listener = (FirstFragment.OnFragmentInteractionListener) context;
+        if (context instanceof SecondFragment.OnFragmentInteractionListener) {
+            listener = (SecondFragment.OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }

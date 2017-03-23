@@ -23,15 +23,17 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="@string/title_home" />
-
     </FrameLayout>
 
-    <fragment android:name="layout.FirstFragment"
-        android:id="@+id/list"
-        android:layout_weight="1"
+    <!--
+    <fragment android:name="layout.BlankFragment"
+        android:id="@+id/FirstFrag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+        -->
+
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"

@@ -18,7 +18,7 @@ import d4.deadline.R;
  * Use the {@link FirstFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FirstFragment extends Fragment {
+public class    FirstFragment extends Fragment {
 
 
     private OnFragmentInteractionListener listener;

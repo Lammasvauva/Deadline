@@ -1,5 +1,7 @@
 package d4.deadline;
 
+import android.app.FragmentManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,10 +16,16 @@ import layout.FirstFragment;
 import layout.SecondFragment;
 import layout.ThirdFragment;
 
-public class MainMenuNavigation extends AppCompatActivity
-{
+public class MainMenuNavigation extends AppCompatActivity implements FirstFragment.OnFragmentInteractionListener,
+SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractionListener{
 
     private TextView mTextMessage;
+
+    //fragments
+    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+   // fragmentTransaction.replace();
+
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -27,31 +35,35 @@ public class MainMenuNavigation extends AppCompatActivity
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+            Fragment fragment = null;
 
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    fragment = FirstFragment.newInstance();
+
                     //tässä pitäisi näkyä fragment
-                    mTextMessage.setText(R.string.title_home);
-
-                    /*
-                    Fragment eka = new FirstFragment();
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-                    transaction.replace(R.id.container, eka).commit();
-*/
-
-
-
-                    return true;
+                   // mTextMessage.setText(R.strin  g.title_home);
+                    //Fragment eka = new FirstFragment();
+                   // FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    //transaction.replace(R.id.container, eka).commit();
+                    break;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
+                    fragment = SecondFragment.newInstance();
+                    //mTextMessage.setText(R.string.title_dashboard);
+                    break;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
+                    fragment = ThirdFragment.newInstance();
+                   // mTextMessage.setText(R.string.title_notifications);
+                    break;
+            }
+            if(fragment != null)
+            {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container, fragment);
+                fragmentTransaction.commit();
             }
 
-            return false;
+            return true;
         }
 
     };
@@ -66,4 +78,5 @@ public class MainMenuNavigation extends AppCompatActivity
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
+
 }
