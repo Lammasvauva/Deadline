@@ -26,6 +26,12 @@
 
     </FrameLayout>
 
+    <fragment android:name="layout.FirstFragment"
+        android:id="@+id/list"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
@@ -33,5 +39,7 @@
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
+
+
 
 </LinearLayout>
