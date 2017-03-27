@@ -11,8 +11,18 @@
         />
 
     <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/action_settings"
-        android:title="action_settings"
+    <item android:id="@+id/Soluutions_settings"
+        android:title="Soluutions"
+        app:showAsAction="never"
+        />
+
+    <item android:id="@+id/Settings_settings"
+        android:title="Settings"
+        app:showAsAction="never"
+        />
+
+    <item android:id="@+id/Logout_settings"
+        android:title="Logout"
         app:showAsAction="never"
         />
 
