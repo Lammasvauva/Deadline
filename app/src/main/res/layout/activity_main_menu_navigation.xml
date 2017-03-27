@@ -27,7 +27,8 @@
             android:id="@+id/fragment_container"
             android:name="layout.BlankFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_blank" />
 
     </FrameLayout>
 
