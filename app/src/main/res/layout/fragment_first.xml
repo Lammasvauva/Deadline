@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,27 +10,50 @@
         android:layout_width= "match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="First Fragment"
+        android:text=""
          android:textColor="#000000"
         />
 
-    <HorizontalScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:weightSum="1">
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="383dp"
-                android:layout_height="66dp"
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="216dp"
                 android:text="TextView" />
 
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="123dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="112dp"
+                android:text="TextView" />
+
+            <Button
+                android:id="@+id/button2"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add" />
         </LinearLayout>
-    </HorizontalScrollView>
+    </ScrollView>
 
 
 </FrameLayout>
