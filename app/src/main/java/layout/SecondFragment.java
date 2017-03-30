@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
 
 import d4.deadline.R;
 
@@ -20,6 +21,7 @@ import d4.deadline.R;
  */
 public class SecondFragment extends Fragment {
 
+    CalendarView simpleCalendarView;
 
     private SecondFragment.OnFragmentInteractionListener listener;
 
@@ -34,7 +36,11 @@ public class SecondFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_second, container, false);
+        View V = inflater.inflate(R.layout.fragment_second, container, false);
+        simpleCalendarView = (CalendarView) V.findViewById(R.id.simpleCalendarView);
+
+        return V;
+
     }
 
     @Override
