@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentActivity;
@@ -35,16 +36,21 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_navigation);
 
+
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+
+
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //set default fragment when opening app
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, FirstFragment.newInstance());
+        fragmentTransaction.replace(R.id.fragment_container, SecondFragment.newInstance());
         fragmentTransaction.commit();
 
         //region set default highlighted navigation bar item
+        navigation.getMenu().getItem(1).setChecked(true);
 
         //endregion
     }
