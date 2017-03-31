@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import layout.BlankFragment;
@@ -21,6 +23,10 @@ public class MainMenuNavigation extends AppCompatActivity implements FirstFragme
 SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener{
 
     private TextView mTextMessage;
+    private EditText mEmailDisplay;
+    private TextView emailMatchingText;
+    String accountEmail;
+    String accountName;
 
     //FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
@@ -55,12 +61,14 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
 
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_navigation);
+
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);

@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private GoogleSignInOptions googleSignInOptions;
     public static final int REQUEST_CODE = 100;
     public static String display_name;
+    public static String display_Email;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -143,8 +144,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             GoogleSignInAccount account = result.getSignInAccount();
 
             //name.setText(account.getDisplayName());
-            //display_name = account.getDisplayName();
+            display_name = account.getDisplayName();
+            display_Email = account.getEmail();
             //MainMenuNavigation.nameString = account.getDisplayName();
+
             Intent myIntent = new Intent(LoginActivity.this, MainMenuNavigation.class);
             LoginActivity.this.startActivity(myIntent);
         }
