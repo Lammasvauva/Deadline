@@ -19,7 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import d4.deadline.R;
-import d4.deadline.LoginActivity;
+import com.d4.deadline.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
