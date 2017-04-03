@@ -36,7 +36,6 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_navigation);
 
-
         //NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
 
 
@@ -111,9 +110,6 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
         fragmentTransaction.commit();
         */
     }
-
-
-
     //endregion
 
 
@@ -147,4 +143,8 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
     }
 
 
+    @Override
+    public void onFragmentInteraction(String uri) {
+
+    }
 }

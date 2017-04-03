@@ -47,11 +47,11 @@
                 android:text="TextView" />
 
             <Button
-                android:id="@+id/add_button_whiteboard"
-                style="@style/Widget.AppCompat.Button"
+                android:id="@+id/addbutton_whiteboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add" />
+                android:text="Button" />
+
         </LinearLayout>
     </ScrollView>
 
