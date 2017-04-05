@@ -6,19 +6,22 @@
     tools:context="layout.FirstFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width= "match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text=""
-         android:textColor="#000000"
-        />
+
+    <EditText
+        android:id="@+id/addTextLine1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:visibility="gone" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -29,28 +32,37 @@
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:layout_height="216dp"
+                android:layout_height="75dp"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:layout_height="123dp"
+                android:layout_height="58dp"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:layout_height="112dp"
+                android:layout_height="60dp"
                 android:text="TextView" />
 
             <Button
                 android:id="@+id/addbutton_whiteboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="Add" />
+
+            <EditText
+                android:id="@+id/addTextLine2"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
 
         </LinearLayout>
     </ScrollView>
