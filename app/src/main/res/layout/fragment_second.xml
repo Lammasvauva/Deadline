@@ -1,14 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:firstDayOfTheWeek="2"
-    android:focusedMonthDateColor="#ff0"
-    android:maxDate="01/01/2070"
-    android:minDate="01/01/1970"
-    android:showWeekNumber="true"
-    android:weekNumberColor="#f00"
-    android:weekSeparatorLineColor="#0f0"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    android:orientation="vertical"
     tools:targetApi="11"
     tools:context="layout.SecondFragment">
 
@@ -16,6 +12,21 @@
     <CalendarView
         android:id="@+id/simpleCalendarView"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:firstDayOfWeek="2"
+        android:focusedMonthDateColor="#ff0"
+        android:maxDate="01/01/2070"
+        android:minDate="01/01/1970"
+        android:showWeekNumber="true"
+        android:weekNumberColor="#f00"
+        android:weekSeparatorLineColor="#0f0"/>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/AddEventButton_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Event" />
+
+
+</LinearLayout>
