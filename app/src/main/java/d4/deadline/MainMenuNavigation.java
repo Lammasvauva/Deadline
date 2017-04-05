@@ -34,6 +34,9 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_main_menu_navigation);
 
         //NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
@@ -147,4 +150,5 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
     public void onFragmentInteraction(String uri) {
 
     }
+
 }
