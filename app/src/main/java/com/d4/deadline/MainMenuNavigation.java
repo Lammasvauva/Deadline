@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import d4.deadline.R;
+import com.d4.deadline.R;
 import layout.BlankFragment;
 import layout.FirstFragment;
 import layout.SecondFragment;

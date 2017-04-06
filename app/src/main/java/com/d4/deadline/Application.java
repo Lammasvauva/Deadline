@@ -1,5 +1,4 @@
 package com.d4.deadline;
-
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 

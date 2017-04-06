@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "L:\\Android\\AndoridStudio\\Projects\\Deadline\\AWSMobileHelper\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\button_google_pressed.png",
+        "source": "L:\\Android\\AndoridStudio\\Projects\\Deadline\\AWSMobileHelper\\src\\main\\res\\mipmap-xxxhdpi\\button_google_pressed.png"
+    },
+    {
+        "merged": "L:\\Android\\AndoridStudio\\Projects\\Deadline\\AWSMobileHelper\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\button_login.png",
+        "source": "L:\\Android\\AndoridStudio\\Projects\\Deadline\\AWSMobileHelper\\src\\main\\res\\mipmap-xxxhdpi\\button_login.png"
+    },
+    {
+        "merged": "L:\\Android\\AndoridStudio\\Projects\\Deadline\\AWSMobileHelper\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\button_google.png",
+        "source": "L:\\Android\\AndoridStudio\\Projects\\Deadline\\AWSMobileHelper\\src\\main\\res\\mipmap-xxxhdpi\\button_google.png"
+    },
+    {
+        "merged": "L:\\Android\\AndoridStudio\\Projects\\Deadline\\AWSMobileHelper\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\button_login_pressed.png",
+        "source": "L:\\Android\\AndoridStudio\\Projects\\Deadline\\AWSMobileHelper\\src\\main\\res\\mipmap-xxxhdpi\\button_login_pressed.png"
+    }
+]

@@ -18,8 +18,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import d4.deadline.R;
+import com.d4.deadline.R;
 import com.d4.deadline.LoginActivity;
+import com.d4.deadline.SplashActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +45,7 @@ public class ThirdFragment extends Fragment implements View.OnClickListener{
     private TextView emailMatchingText;
     private Button addBtn;
     private ListView groupList;
+    private Button logOutBtn;
 
 
 
@@ -89,6 +91,13 @@ public class ThirdFragment extends Fragment implements View.OnClickListener{
 
 
         emailMatchingText.setVisibility(View.GONE);
+        logOutBtn = (Button) getView().findViewById(R.id.logout_btn);
+        logOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //SplashActivity.onClickList();
+            }
+        });
 
 
         accountEmail = LoginActivity.display_Email;
@@ -120,6 +129,7 @@ public class ThirdFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
 
         givenEmailString = mEmailDisplay.getText().toString();
         emailArrayList.add(givenEmailString);

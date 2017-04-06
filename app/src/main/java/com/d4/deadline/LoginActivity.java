@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.d4.deadline.MainMenuNavigation;
-import d4.deadline.R;
+import com.d4.deadline.R;
 
 import static android.Manifest.permission.READ_CONTACTS;
 

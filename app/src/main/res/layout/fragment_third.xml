@@ -29,6 +29,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/addBtn"
                 android:text="add"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="LOGOUT"
+                android:id="@+id/logout_btn"/>
         </LinearLayout>
     <ListView
         android:layout_width="match_parent"

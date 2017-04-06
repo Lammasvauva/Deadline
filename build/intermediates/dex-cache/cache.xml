@@ -12,66 +12,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\User\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-ddb-mapper\2.3.9\b64f410bf2f4d4db5642f066d9bad54d2ea4608c\aws-android-sdk-ddb-mapper-2.3.9.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b64f410bf2f4d4db5642f066d9bad54d2ea4608c">
-        <dex dex="L:\Android\AndoridStudio\Projects\Deadline\app\build\intermediates\transforms\dex\debug\folders\1000\10\aws-android-sdk-ddb-mapper-2.3.9_b66c54a2ca6f74cb1999dafd3b8aa0fbca87dbde\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\User\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-core\2.3.9\2fa9ee0e95329912656c8ccd98991b195a3ea539\aws-android-sdk-core-2.3.9.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2fa9ee0e95329912656c8ccd98991b195a3ea539">
-        <dex dex="L:\Android\AndoridStudio\Projects\Deadline\app\build\intermediates\transforms\dex\debug\folders\1000\10\aws-android-sdk-core-2.3.9_2a7429b9ee8d4a44e26ce939cf9b61a952087b59\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\User\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-s3\2.3.9\8b4d1ccbb09daafd17aa3eba99af31ad8aecf505\aws-android-sdk-s3-2.3.9.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="8b4d1ccbb09daafd17aa3eba99af31ad8aecf505">
-        <dex dex="L:\Android\AndoridStudio\Projects\Deadline\app\build\intermediates\transforms\dex\debug\folders\1000\10\aws-android-sdk-s3-2.3.9_c21e6f033dbf4fa5841f2ebaa448a17c1b3c7a24\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="L:\Android\AndoridStudio\gradle\m2repository\com\google\code\gson\gson\2.2.4\gson-2.2.4.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="L:\Android\AndoridStudio\Projects\Deadline\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.2.4_13e080c94a0a855533adbac951e22c7d47b2116d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Android\.android\build-cache\987272a17a9a1fb256b0f4ede6919debc7bc2528\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
-        <dex dex="L:\Android\AndoridStudio\Projects\Deadline\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_59e6ad68eb73ebd8ac0624b3506317418062dc66\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="L:\Android\AndoridStudio\Projects\Deadline\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="2736ab8f89c34f3ca941fc023b87001a5954663b">
+        sha1="01486477852dd030dda3e821ae7241d006f3da87">
         <dex dex="L:\Android\AndoridStudio\Projects\Deadline\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_75782f4dbf2f474f8a07f327fc9bb4925dced2bf\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\User\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-ddb\2.3.9\5d12b8c7c10b169cdddb3d6c09c800a42dfba6b7\aws-android-sdk-ddb-2.3.9.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="5d12b8c7c10b169cdddb3d6c09c800a42dfba6b7">
-        <dex dex="L:\Android\AndoridStudio\Projects\Deadline\app\build\intermediates\transforms\dex\debug\folders\1000\10\aws-android-sdk-ddb-2.3.9_0afd55340f67a31e2d12422e86bd72332e724942\classes.dex" />
     </item>
 
 </items>

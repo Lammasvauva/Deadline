@@ -19,18 +19,27 @@ import com.amazonaws.regions.Regions;
 public class AWSConfiguration {
     // AWS MobileHub user agent string
     public static final String AWS_MOBILEHUB_USER_AGENT =
-        "MobileHub 27d7a854-909b-4ff6-a694-7bfbbeefccd4 aws-my-sample-app-android-v0.16";
+        "MobileHub 4f7b95a1-facf-435b-ba58-c7b41220b48a aws-my-sample-app-android-v0.16";
     // AMAZON COGNITO
     public static final Regions AMAZON_COGNITO_REGION =
       Regions.fromName("us-east-1");
     public static final String  AMAZON_COGNITO_IDENTITY_POOL_ID =
-        "us-east-1:c59f9d4a-9257-43fb-965f-a7f75a9e84fd";
-    public static final Regions AMAZON_DYNAMODB_REGION =
-       Regions.fromName("us-east-1");
+        "us-east-1:d977399f-5ff8-47c6-a280-8877b170e124";
+    // Google Client ID for Web application
+    public static final String GOOGLE_CLIENT_ID =
+        "81037932111-tkii1as1sbjfgve6ccqfrak27rech9f0.apps.googleusercontent.com";
+    public static final String AMAZON_COGNITO_USER_POOL_ID =
+        "us-east-1_TuncU82E5";
+    public static final String AMAZON_COGNITO_USER_POOL_CLIENT_ID =
+        "4ie6ltel598thqg4bn947a4ebi";
+    public static final String AMAZON_COGNITO_USER_POOL_CLIENT_SECRET =
+        "i8eafs1vvnkec1e4omo2nssegr6a6f32tdtiq2e7ah5t6or6ouk";
 
     private static final AWSMobileHelperConfiguration helperConfiguration = new AWSMobileHelperConfiguration.Builder()
         .withCognitoRegion(AMAZON_COGNITO_REGION)
         .withCognitoIdentityPoolId(AMAZON_COGNITO_IDENTITY_POOL_ID)
+        .withCognitoUserPool(AMAZON_COGNITO_USER_POOL_ID,
+            AMAZON_COGNITO_USER_POOL_CLIENT_ID, AMAZON_COGNITO_USER_POOL_CLIENT_SECRET)
         .build();
     /**
      * @return the configuration for AWSKit.
