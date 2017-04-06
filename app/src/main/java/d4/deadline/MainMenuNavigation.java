@@ -53,6 +53,7 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
 
         //region set default highlighted navigation bar item
         navigation.getMenu().getItem(1).setChecked(true);
+        //Blaa
 
         //endregion
     }
