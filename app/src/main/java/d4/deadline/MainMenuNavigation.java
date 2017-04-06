@@ -3,13 +3,20 @@ package d4.deadline;
 import android.app.FragmentManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.Toast;
+import android.widget.Toolbar;
 import android.widget.TextView;
 
 import layout.BlankFragment;
@@ -22,7 +29,34 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
 
     private TextView mTextMessage;
 
-    //FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+
+
+        setContentView(R.layout.activity_main_menu_navigation);
+
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+
+
+        mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        //set default fragment when opening app
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, SecondFragment.newInstance());
+        fragmentTransaction.commit();
+
+        //region set default highlighted navigation bar item
+        navigation.getMenu().getItem(1).setChecked(true);
+
+        //endregion
+    }
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -55,30 +89,65 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
 
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
 
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu_navigation);
-
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        //set default fragment when opening app
+    //region Set fragment methods
+    public void SetFirstFragment()
+    {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, FirstFragment.newInstance());
         fragmentTransaction.commit();
+    }
+
+    public void SetSecondFragment()
+    {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, SecondFragment.newInstance());
+        fragmentTransaction.commit();
+    }
+
+    public void SetSettingsFragment()
+    {
+        /*
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, ItemFragment.newInstance());
+        fragmentTransaction.commit();
+        */
+    }
+    //endregion
 
 
-        //region set default highlighted navigation bar item
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
 
-        //endregion
+
+    @Override
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_refresh was selected
+            case R.id.Settings_settings:
+                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            // action with ID action_settings was selected
+            case R.id.Logout_settings:
+                Toast.makeText(this, "Logout selected", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
 
 
-
-
+    @Override
+    public void onFragmentInteraction(String uri) {
 
     }
 
