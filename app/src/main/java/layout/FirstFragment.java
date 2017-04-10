@@ -117,6 +117,7 @@ public class FirstFragment extends Fragment {
                         noteText = input.getText().toString();
                         TextView a = new TextView(view.getContext());
                         //a.setText("Tämä on luotu juuri nyt, indeksi on: " +notesIndex);
+                        //
                         a.setText(noteText);
                         a.setHeight(150);
                         a.setGravity(Gravity.CENTER);
