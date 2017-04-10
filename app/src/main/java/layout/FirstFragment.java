@@ -103,7 +103,7 @@ public class FirstFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Title");
 
-                // Set up the input
+                // Set up the input/
                 final EditText input = new EditText(getContext());
                 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
                 //input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
