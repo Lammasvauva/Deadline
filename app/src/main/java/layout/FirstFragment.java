@@ -19,6 +19,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -73,6 +74,7 @@ public class FirstFragment extends Fragment {
             //Recreate notes
             for (int i = 0; i < 5; i++) {
                 TextView a = new TextView(view.getContext());
+                //Tähän tekstikenttien editointi
                 a.setText("Tämä on luotu juuri nyt, indeksi on: " + notesIndex);
                 a.setHeight(150);
                 a.setGravity(Gravity.CENTER);
@@ -101,7 +103,12 @@ public class FirstFragment extends Fragment {
                 //et.setVisibility(View.VISIBLE);
                 //et2.setVisibility(View.VISIBLE);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Title");
+                builder.setTitle("Set Note");
+
+                //AlertDialog dialog = builder.create();
+                //dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                //dialog.show();
+
 
                 // Set up the input
                 final EditText input = new EditText(getContext());
@@ -117,6 +124,9 @@ public class FirstFragment extends Fragment {
                         noteText = input.getText().toString();
                         TextView a = new TextView(view.getContext());
                         //a.setText("Tämä on luotu juuri nyt, indeksi on: " +notesIndex);
+
+                        //Tähän tekstikenttien editointi
+
                         a.setText(noteText);
                         a.setHeight(150);
                         a.setGravity(Gravity.CENTER);
