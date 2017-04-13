@@ -20,6 +20,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -56,14 +57,12 @@ public class FirstFragment extends Fragment {
         return new FirstFragment();
     }
 
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if(savedInstanceState != null)
         {notesIndex = savedInstanceState.getInt("notesIndex");}
     }
-
 
 
     @Override
@@ -79,7 +78,7 @@ public class FirstFragment extends Fragment {
         {notesIndex = savedInstanceState.getInt("notesIndex");}
 
         LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
-        EditText et2 = (EditText) view.findViewById(R.id.addTextLine2);
+        //EditText et2 = (EditText) view.findViewById(R.id.addTextLine2);
         //if created the first time
         if (notesIndex > 0)
         {
@@ -88,7 +87,7 @@ public class FirstFragment extends Fragment {
             a.setHeight(150);
             a.setGravity(Gravity.CENTER);
             myLayout.addView(a);
-            et2.setVisibility(View.VISIBLE);
+            //et2.setVisibility(View.VISIBLE);
         }
         else
         {
@@ -100,7 +99,7 @@ public class FirstFragment extends Fragment {
                 a.setHeight(150);
                 a.setGravity(Gravity.CENTER);
                 myLayout.addView(a);
-                et2.setVisibility(View.VISIBLE);
+                //et2.setVisibility(View.VISIBLE);
             }
 
         }
@@ -111,7 +110,7 @@ public class FirstFragment extends Fragment {
 
 
             EditText et = (EditText) view.findViewById(R.id.addTextLine1);
-            EditText et2 = (EditText) view.findViewById(R.id.addTextLine2);
+            //EditText et2 = (EditText) view.findViewById(R.id.addTextLine2);
 
             @Override
             //Put button functionality here
