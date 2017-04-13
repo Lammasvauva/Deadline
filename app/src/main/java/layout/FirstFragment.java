@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.Gravity;
@@ -57,23 +58,12 @@ public class FirstFragment extends Fragment {
 
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            // Restore last state for checked position.
-            notesIndex = savedInstanceState.getInt("notesIndex", 1);
-        }
+        if(savedInstanceState != null)
+        {notesIndex = savedInstanceState.getInt("notesIndex");}
     }
 
-    @Override
-    public void onViewStateRestored(Bundle savedInstanceState)
-    {
-        super.onViewStateRestored(savedInstanceState);
-        if (savedInstanceState != null) {
-            // Restore last state for checked position.
-            notesIndex = savedInstanceState.getInt("notesIndex", 1);
-        }
-    }
 
 
     @Override
@@ -85,20 +75,31 @@ public class FirstFragment extends Fragment {
 
         //region get saved data
         super.onCreate(savedInstanceState);
+        if(savedInstanceState != null)
+        {notesIndex = savedInstanceState.getInt("notesIndex");}
+
         LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
         EditText et2 = (EditText) view.findViewById(R.id.addTextLine2);
         //if created the first time
-        if (savedInstanceState == null) {
-        } else {
+        if (notesIndex > 0)
+        {
+            TextView a = new TextView(view.getContext());
+            a.setText("Muistista luku onnistui, indeksi on: " + notesIndex);
+            a.setHeight(150);
+            a.setGravity(Gravity.CENTER);
+            myLayout.addView(a);
+            et2.setVisibility(View.VISIBLE);
+        }
+        else
+        {
             //notesIndex = savedInstanceState.getInt("notesIndex");
             //Recreate notes
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 1; i++) {
                 TextView a = new TextView(view.getContext());
-                a.setText("Tämä on luotu juuri nyt, indeksi on: " + notesIndex);
+                a.setText("Muisti on tyhjä, indeksi on: " + notesIndex);
                 a.setHeight(150);
                 a.setGravity(Gravity.CENTER);
                 myLayout.addView(a);
-                //a.setBackground();
                 et2.setVisibility(View.VISIBLE);
             }
 
@@ -232,6 +233,9 @@ public class FirstFragment extends Fragment {
 
         builder.show();
     }
+
+
+
 
 
     //Store data here
