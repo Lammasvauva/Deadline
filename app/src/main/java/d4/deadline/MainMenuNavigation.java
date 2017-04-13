@@ -30,31 +30,41 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
     private TextView mTextMessage;
 
 
+    public static FirstFragment fragment_1;
+    public static SecondFragment fragment_2;
+    public static ThirdFragment fragment_3;
+    public static android.support.v4.app.FragmentManager fragmentManager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-
-
         setContentView(R.layout.activity_main_menu_navigation);
+        fragment_1 = new FirstFragment();
+        fragment_2 = new SecondFragment();
+        fragment_3 = new ThirdFragment();
+
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction_1 = fragmentManager.beginTransaction();
+        transaction_1.replace(R.id.fragment_container, fragment_2);
+        transaction_1.commit();
 
         //NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
-
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        /*
         //set default fragment when opening app
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, SecondFragment.newInstance());
         fragmentTransaction.commit();
+        */
 
         //region set default highlighted navigation bar item
         navigation.getMenu().getItem(1).setChecked(true);
-        //Blaa
-
         //endregion
     }
 
@@ -69,13 +79,16 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
 
             switch (item.getItemId()) {
                 case R.id.navigation_whiteboard:
-                    fragment = FirstFragment.newInstance();
+                    //fragment = FirstFragment.newInstance();
+                    fragment = fragment_1;
                     break;
                 case R.id.navigation_home:
-                    fragment = SecondFragment.newInstance();
+                    //fragment = SecondFragment.newInstance();
+                    fragment = fragment_2;
                     break;
                 case R.id.navigation_dashboard:
-                    fragment = ThirdFragment.newInstance();
+                    //fragment = ThirdFragment.newInstance();
+                    fragment = fragment_3;
                     break;
             }
             if(fragment != null)
@@ -91,12 +104,43 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
     };
 
 
+    public void loadFragment(final Fragment fragment) {
+
+        // create a transaction for transition here
+        final FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
+
+        // put the fragment in place
+        transaction.replace(R.id.fragment_container, fragment);
+
+        // this is the part that will cause a fragment to be added to backstack,
+        // this way we can return to it at any time using this tag
+        transaction.addToBackStack(fragment.getClass().getName());
+
+        transaction.commit();
+    }
+
+
+    public void backToFragment(final Fragment fragment) {
+        // go back to something that was added to the backstack
+        getSupportFragmentManager().popBackStackImmediate(
+                fragment.getClass().getName(), 0);
+        // use 0 or the below constant as flag parameter
+        // FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
+
     //region Set fragment methods
     public void SetFirstFragment()
     {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, FirstFragment.newInstance());
-        fragmentTransaction.commit();
+        FragmentTransaction transaction_2 = MainMenuNavigation.fragmentManager
+                .beginTransaction();
+
+        transaction_2.replace(R.id.fragment_container,
+                MainMenuNavigation.fragment_2);
+        transaction_2.addToBackStack(null);
+        transaction_2.commit();
+
     }
 
     public void SetSecondFragment()

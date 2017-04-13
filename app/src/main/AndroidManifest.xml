@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainMenuNavigation"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_main_menu_navigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

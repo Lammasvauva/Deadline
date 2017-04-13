@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.Gravity;
@@ -55,6 +56,16 @@ public class FirstFragment extends Fragment {
         return new FirstFragment();
     }
 
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if(savedInstanceState != null)
+        {notesIndex = savedInstanceState.getInt("notesIndex");}
+    }
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -64,20 +75,31 @@ public class FirstFragment extends Fragment {
 
         //region get saved data
         super.onCreate(savedInstanceState);
+        if(savedInstanceState != null)
+        {notesIndex = savedInstanceState.getInt("notesIndex");}
+
         LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
         EditText et2 = (EditText) view.findViewById(R.id.addTextLine2);
         //if created the first time
-        if (savedInstanceState == null) {
-        } else {
-            notesIndex = savedInstanceState.getInt("notesIndex");
+        if (notesIndex > 0)
+        {
+            TextView a = new TextView(view.getContext());
+            a.setText("Muistista luku onnistui, indeksi on: " + notesIndex);
+            a.setHeight(150);
+            a.setGravity(Gravity.CENTER);
+            myLayout.addView(a);
+            et2.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            //notesIndex = savedInstanceState.getInt("notesIndex");
             //Recreate notes
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 1; i++) {
                 TextView a = new TextView(view.getContext());
-                a.setText("Tämä on luotu juuri nyt, indeksi on: " + notesIndex);
+                a.setText("Muisti on tyhjä, indeksi on: " + notesIndex);
                 a.setHeight(150);
                 a.setGravity(Gravity.CENTER);
                 myLayout.addView(a);
-                //a.setBackground();
                 et2.setVisibility(View.VISIBLE);
             }
 
@@ -103,7 +125,7 @@ public class FirstFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Title");
 
-                // Set up the input
+                // Set up the input/
                 final EditText input = new EditText(getContext());
                 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
                 //input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -117,7 +139,7 @@ public class FirstFragment extends Fragment {
                         noteText = input.getText().toString();
                         TextView a = new TextView(view.getContext());
                         //a.setText("Tämä on luotu juuri nyt, indeksi on: " +notesIndex);
-                        a.setText(noteText);
+                        a.setText(noteText + " , indeksi: " +notesIndex);
                         a.setHeight(150);
                         a.setGravity(Gravity.CENTER);
                         myLayout.addView(a);
@@ -174,6 +196,14 @@ public class FirstFragment extends Fragment {
     }
 
 
+    public void onPause(Bundle state)
+    {
+        super.onSaveInstanceState(state);
+        state.putInt("notesIndex", notesIndex);
+
+    }
+
+
     public void CreateWhiteboardNote() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -203,6 +233,9 @@ public class FirstFragment extends Fragment {
 
         builder.show();
     }
+
+
+
 
 
     //Store data here
