@@ -28,20 +28,32 @@
             android:gravity="center"
             android:weightSum="1">
 
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="258dp"
+                android:layout_height="93dp"
+                android:text="TextView" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="662dp"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <EditText
+                android:id="@+id/addTextLine2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:visibility="gone" />
+
             <Button
                 android:id="@+id/addbutton_whiteboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add" />
-
-            <EditText
-                android:id="@+id/addTextLine2"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
 
         </LinearLayout>
     </ScrollView>

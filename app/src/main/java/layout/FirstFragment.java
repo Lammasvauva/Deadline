@@ -55,6 +55,27 @@ public class FirstFragment extends Fragment {
         return new FirstFragment();
     }
 
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            // Restore last state for checked position.
+            notesIndex = savedInstanceState.getInt("notesIndex", 1);
+        }
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState)
+    {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null) {
+            // Restore last state for checked position.
+            notesIndex = savedInstanceState.getInt("notesIndex", 1);
+        }
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -69,7 +90,7 @@ public class FirstFragment extends Fragment {
         //if created the first time
         if (savedInstanceState == null) {
         } else {
-            notesIndex = savedInstanceState.getInt("notesIndex");
+            //notesIndex = savedInstanceState.getInt("notesIndex");
             //Recreate notes
             for (int i = 0; i < 5; i++) {
                 TextView a = new TextView(view.getContext());
@@ -117,7 +138,7 @@ public class FirstFragment extends Fragment {
                         noteText = input.getText().toString();
                         TextView a = new TextView(view.getContext());
                         //a.setText("Tämä on luotu juuri nyt, indeksi on: " +notesIndex);
-                        a.setText(noteText);
+                        a.setText(noteText + " , indeksi: " +notesIndex);
                         a.setHeight(150);
                         a.setGravity(Gravity.CENTER);
                         myLayout.addView(a);
@@ -171,6 +192,14 @@ public class FirstFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(String uri);
+    }
+
+
+    public void onPause(Bundle state)
+    {
+        super.onSaveInstanceState(state);
+        state.putInt("notesIndex", notesIndex);
+
     }
 
 
