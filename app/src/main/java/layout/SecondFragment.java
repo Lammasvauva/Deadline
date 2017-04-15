@@ -3,6 +3,7 @@ package layout;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -44,6 +45,9 @@ public class SecondFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View V = inflater.inflate(R.layout.fragment_second, container, false);
         simpleCalendarView = (CalendarView) V.findViewById(R.id.simpleCalendarView);
+        simpleCalendarView.setWeekSeparatorLineColor(Color.BLACK);
+        simpleCalendarView.setFocusedMonthDateColor(Color.RED);
+
         Button clickButton = (Button)V.findViewById(R.id.AddEventButton_calendar);
         clickButton.setOnClickListener(new View.OnClickListener() {
             @Override

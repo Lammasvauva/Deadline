@@ -14,13 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:firstDayOfWeek="2"
-        android:focusedMonthDateColor="#ff0"
-        android:maxDate="01/01/2070"
-        android:minDate="01/01/1970"
-        android:showWeekNumber="true"
-        android:weekNumberColor="#f00"
-        android:weekSeparatorLineColor="#0f0"/>
+        android:firstDayOfWeek="2" />
 
     <Button
         android:id="@+id/AddEventButton_calendar"
