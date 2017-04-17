@@ -33,7 +33,9 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import d4.deadline.MainMenuNavigation;
 import d4.deadline.R;
@@ -50,7 +52,7 @@ import d4.deadline.R;
 public class FirstFragment extends Fragment {
 
     //Variables
-    final List<TextView> TextViews = new ArrayList<TextView>();
+    List<TextView> TextViews = new ArrayList<TextView>();
     public int notesIndex;
     private String noteText = "";
 
@@ -80,11 +82,16 @@ public class FirstFragment extends Fragment {
            // savedText = prefs.getString("noteText", "TÄMÄ EI PAHA POIS");
             //noteTexts = savedInstanceState.getStringArray("noteTexts");
         }
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String tValue = sharedPreferences.getString("textvalue","");
+
+
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_first, container, false);
         Button clickButton = (Button) view.findViewById(R.id.addbutton_whiteboard);
@@ -95,7 +102,7 @@ public class FirstFragment extends Fragment {
         if(savedInstanceState != null)
         {notesIndex = savedInstanceState.getInt("notesIndex");}
 
-        LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
+        final LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
         //EditText et2 = (EditText) view.findViewById(R.id.addTextLine2);
         //if created the first time
         if (notesIndex > 0)
@@ -188,14 +195,51 @@ public class FirstFragment extends Fragment {
                         a.setHeight(150);
                         a.setGravity(Gravity.CENTER);
                         myLayout.addView(a);
-                        //a.setBackground();
-                        //Add to lists to save
+                        TextViews.add(a);
                         noteTexts.add(noteText);
-                        //noteTexts[notesIndex]="adwad";
 
-                        //editor.putString("noteTexts", noteTexts.toString());
-                        //editor.putString("noteText", noteText);
-                        //editor.commit();
+
+                        //Clicking textviews
+                        //region set Clicking textviews
+                        //Tapa 1 ei toimi
+
+                        for (TextView current: TextViews)
+                        {
+                            current.setOnClickListener(new View.OnClickListener()
+                            {
+                                @Override
+                                public void onClick(View v)
+                                {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                    builder.setTitle("Delete?");
+
+                                    // Set up the buttons
+                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            myLayout.removeView(current);
+                                        }
+                                    });
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                                    builder.show();
+
+                                }
+                            });
+                        }
+                        //endregion
+
+
+
+
+
+
+
 
                     }
                 });
@@ -214,25 +258,7 @@ public class FirstFragment extends Fragment {
         });
 
 
-        //Clicking textviews
-        for (TextView a: TextViews)
-        {
-            a.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    final LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
-                    TextView c = new TextView(view.getContext());
-                    c.setText("Tämä on uusi");
-                    c.setHeight(150);
-                    c.setGravity(Gravity.CENTER);
-                    myLayout.addView(c);
-                }
-            });
 
-
-        }
 
 
 
@@ -242,7 +268,12 @@ public class FirstFragment extends Fragment {
 
 
 
+    public void CreateTextViewListener(LayoutInflater inflater, ViewGroup container)
+    {
 
+
+
+    }
 
 
     public void onButtonPressed(String uri) {
@@ -315,6 +346,8 @@ public class FirstFragment extends Fragment {
 
 
 
+
+
     //Store data here
     @Override
     public void onSaveInstanceState(Bundle state) {
@@ -322,7 +355,23 @@ public class FirstFragment extends Fragment {
         state.putInt("notesIndex", notesIndex);
         //state.putStringArray("noteTexts", noteTexts);
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        int index = 0;
+        for (TextView text:TextViews)
+        {
+            //editor.putString("Textvalue" + String.valueOf(notesIndex), text.getText().toString());
+            editor.putString("Textvalue" + String.valueOf(index), text.getText().toString());
+            index = index +1;
+        }
+
+        notesIndex = TextViews.size();
+        editor.putInt("notesIndex", notesIndex);
+
+        editor.commit();
     }
+
 
 
 }
