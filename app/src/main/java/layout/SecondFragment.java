@@ -8,13 +8,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.Toast;
 
+import com.github.sundeepk.compactcalendarview.CompactCalendarView;
+import com.github.sundeepk.compactcalendarview.domain.Event;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import d4.deadline.R;
 
@@ -28,7 +37,8 @@ import d4.deadline.R;
  */
 public class SecondFragment extends Fragment {
 
-    CalendarView simpleCalendarView;
+    CompactCalendarView compactcalendar_view;
+    private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
 
     private SecondFragment.OnFragmentInteractionListener listener;
 
@@ -43,24 +53,38 @@ public class SecondFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View V = inflater.inflate(R.layout.fragment_second, container, false);
-        simpleCalendarView = (CalendarView) V.findViewById(R.id.simpleCalendarView);
-        simpleCalendarView.setWeekSeparatorLineColor(Color.BLACK);
-        simpleCalendarView.setFocusedMonthDateColor(Color.RED);
 
-        Button clickButton = (Button)V.findViewById(R.id.AddEventButton_calendar);
-        clickButton.setOnClickListener(new View.OnClickListener() {
+        final ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setTitle(null);
+
+        View V = inflater.inflate(R.layout.fragment_second, container, false);
+        compactcalendar_view = (CompactCalendarView) V.findViewById(R.id.compactcalendar_view);
+        compactcalendar_view.setUseThreeLetterAbbreviation(true);
+
+        Event ev1 = new Event(Color.RED, 1349866756000L, "Teachers' Professional Day");
+        compactcalendar_view.addEvent(ev1);
+        Event ev2 = new Event(Color.RED, 1350039556000L, "Teachers' Professional Day");
+        compactcalendar_view.addEvent(ev2);
+
+        compactcalendar_view.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
-            public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
-                Intent intent = new Intent(Intent.ACTION_EDIT);
-                intent.setType("vnd.android.cursor.item/event");
-                intent.putExtra("beginTime", cal.getTimeInMillis());
-                intent.putExtra("allDay", true);
-                intent.putExtra("rule", "FREQ=YEARLY");
-                intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
-                intent.putExtra("title", "A Test Event from android app");
-                startActivity(intent);
+            public void onDayClick(Date dateClicked) {
+                Context context = getActivity().getApplicationContext();
+
+                if (dateClicked.toString().compareTo("Fri Oct 21 00:00:00 AST 2016") == 0) {
+                    Toast.makeText(context, "Teachers' Professional Day", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "No Events Planned for that day", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+
+            @Override
+            public void onMonthScroll(Date firstDayOfNewMonth) {
+                actionBar.setTitle(dateFormatMonth.format(firstDayOfNewMonth));
             }
         });
 
