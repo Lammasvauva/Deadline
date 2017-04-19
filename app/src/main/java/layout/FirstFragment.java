@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
+import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -39,6 +40,8 @@ import java.util.Set;
 
 import d4.deadline.MainMenuNavigation;
 import d4.deadline.R;
+
+import static android.R.id.input;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,7 +82,7 @@ public class FirstFragment extends Fragment {
         if(savedInstanceState != null)
         {
             notesIndex = savedInstanceState.getInt("notesIndex");
-           // savedText = prefs.getString("noteText", "TÄMÄ EI PAHA POIS");
+            // savedText = prefs.getString("noteText", "TÄMÄ EI PAHA POIS");
             //noteTexts = savedInstanceState.getStringArray("noteTexts");
         }
 
@@ -127,10 +130,9 @@ public class FirstFragment extends Fragment {
                 a.setHeight(150);
                 a.setGravity(Gravity.CENTER);
                 myLayout.addView(a);
-
             }
             */
- 
+
         }
         else
         {
@@ -161,7 +163,6 @@ public class FirstFragment extends Fragment {
         clickButton.setOnClickListener(new View.OnClickListener() {
 
             EditText et = (EditText) view.findViewById(R.id.addTextLine1);
-            //EditText et2 = (EditText) view.findViewById(R.id.addTextLine2);
 
             @Override
             //Put button functionality here
@@ -172,87 +173,28 @@ public class FirstFragment extends Fragment {
 
                 //et.setVisibility(View.VISIBLE);
                 //et2.setVisibility(View.VISIBLE);
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Title");
+                //AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                //builder.setTitle("Title");
 
                 // Set up the input/
-                final EditText input = new EditText(getContext());
+                //final EditText input = new EditText(getContext());
                 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
                 //input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                //input.setInputType(InputType.TYPE_CLASS_TEXT);
+                // Set up the input/
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                final EditText input = new EditText(getContext());
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
                 builder.setView(input);
 
-                // Set up the buttons
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        notesIndex = new Integer(notesIndex + 1);
-                        noteText = input.getText().toString();
-                        TextView a = new TextView(view.getContext());
-                        //a.setText("Tämä on luotu juuri nyt, indeksi on: " +notesIndex);
-                        a.setText(noteText + " , indeksi: " +notesIndex);
-                        a.setHeight(150);
-                        a.setGravity(Gravity.CENTER);
-                        myLayout.addView(a);
-                        TextViews.add(a);
-                        noteTexts.add(noteText);
-
-
-                        //Clicking textviews
-                        //region set Clicking textviews
-                        //Tapa 1 ei toimi
-
-                        for (TextView current: TextViews)
-                        {
-                            current.setOnClickListener(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View v)
-                                {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                    builder.setTitle("Delete?");
-
-                                    // Set up the buttons
-                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            myLayout.removeView(current);
-                                        }
-                                    });
-                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.cancel();
-                                        }
-                                    });
-
-                                    builder.show();
-
-                                }
-                            });
-                        }
-                        //endregion
-
-
-
-
-
-
-
-
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                        addViewToLayout(view, myLayout);
                     }
                 });
 
-                builder.show();
-                //Toast.makeText(getActivity(), "Fragment Button Click", Toast.LENGTH_LONG).show();
-                //onButtonPressed("Fragment Button Click");
+
             }
 
         });
@@ -261,10 +203,57 @@ public class FirstFragment extends Fragment {
 
 
 
-
-
         return view;
     }
+
+    void addViewToLayout(View view, final LinearLayout myLayout){
+
+        // Set up the input/
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final EditText input = new EditText(getContext());
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        notesIndex = new Integer(notesIndex + 1);
+        noteText = input.getText().toString();
+        TextView a = new TextView(view.getContext());
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertToDelete(v, myLayout);
+            }
+        });
+        a.setText("wadwadwad" +noteText);
+        a.setHeight(150);
+        a.setGravity(Gravity.CENTER);
+        myLayout.addView(a);
+        TextViews.add(a);
+        noteTexts.add(noteText);
+    }
+
+
+    void showAlertToDelete(final View v, final LinearLayout myLayout){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Delete?");
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                myLayout.removeView(v);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+
 
 
 
