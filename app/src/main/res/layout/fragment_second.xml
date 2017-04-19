@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingRight="16dp"
     android:paddingLeft="16dp"
     android:orientation="vertical"
@@ -9,18 +10,21 @@
     tools:context="layout.SecondFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <CalendarView
-        android:id="@+id/simpleCalendarView"
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/compactcalendar_view"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:firstDayOfWeek="2"
-        android:focusedMonthDateColor="#ff0"
-        android:maxDate="01/01/2070"
-        android:minDate="01/01/1970"
-        android:showWeekNumber="true"
-        android:weekNumberColor="#f00"
-        android:weekSeparatorLineColor="#0f0"/>
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_height="250dp"
+        app:compactCalendarTargetHeight="250dp"
+        app:compactCalendarTextSize="12sp"
+        app:compactCalendarBackgroundColor="#ffe95451"
+        app:compactCalendarTextColor="#fff"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
+        app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
+        app:compactCalendarMultiEventIndicatorColor="#fff"
+        />
 
     <Button
         android:id="@+id/AddEventButton_calendar"
