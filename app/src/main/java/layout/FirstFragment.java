@@ -110,30 +110,6 @@ public class FirstFragment extends Fragment {
         {
             addViewToLayout(view, myLayout,"Muistissa oli jotain");
 
-            /*
-            TextView a = new TextView(view.getContext());
-            TextViews.add(a);
-
-            a.setText("Muistista luku onnistui, indeksi on: " + notesIndex);
-            //a.setText(savedText);
-            a.setHeight(150);
-            a.setGravity(Gravity.CENTER);
-            myLayout.addView(a);
-            //et2.setVisibility(View.VISIBLE);
-
-
-            /*
-            for (String text: noteTexts)
-            {
-                TextView a = new TextView(view.getContext());
-                a.setText("" + text);
-                a.setHeight(150);
-                a.setGravity(Gravity.CENTER);
-                myLayout.addView(a);
-            }
-            */
-
-
         }
         else
         {
@@ -177,19 +153,9 @@ public class FirstFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-
                         notesIndex = new Integer(notesIndex + 1);
                         noteText = input.getText().toString();
                         TextView a = new TextView(view.getContext());
-                        //a.setText("Tämä on luotu juuri nyt, indeksi on: " +notesIndex);
-                        //a.setText(noteText + " , indeksi: " +notesIndex);
-                        //a.setHeight(150);
-                        //a.setGravity(Gravity.CENTER);
-                        //myLayout.addView(a);
-                        //TextViews.add(a);
-                        //noteTexts.add(noteText);
-
-
                         addViewToLayout(view, myLayout,noteText);
                     }
                 });
@@ -211,19 +177,6 @@ public class FirstFragment extends Fragment {
 
 
     void addViewToLayout(View view, final LinearLayout myLayout, String text){
-
-        // Set up the input/
-
-        /*
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        final EditText input = new EditText(getContext());
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-
-
-        notesIndex = new Integer(notesIndex + 1);
-        noteText = input.getText().toString();
-        */
 
         TextView a = new TextView(view.getContext());
 
@@ -266,16 +219,6 @@ public class FirstFragment extends Fragment {
 
 
 
-
-
-    public void CreateTextViewListener(LayoutInflater inflater, ViewGroup container)
-    {
-
-
-
-    }
-
-
     public void onButtonPressed(String uri) {
         if (listener != null) {
             listener.onFragmentInteraction(uri);
@@ -309,37 +252,6 @@ public class FirstFragment extends Fragment {
         super.onSaveInstanceState(state);
         state.putInt("notesIndex", notesIndex);
 
-    }
-
-
-    public void CreateWhiteboardNote() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Title");
-
-        // Set up the input
-        final EditText input = new EditText(getContext());
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        //input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-
-        // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                noteText = input.getText().toString();
-
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
     }
 
 
