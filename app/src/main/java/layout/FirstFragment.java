@@ -88,8 +88,6 @@ public class FirstFragment extends Fragment {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String tValue = sharedPreferences.getString("textvalue","");
-
-
     }
 
 
@@ -110,7 +108,9 @@ public class FirstFragment extends Fragment {
         //if created the first time
         if (notesIndex > 0)
         {
+            addViewToLayout(view, myLayout,"Muistissa oli jotain");
 
+            /*
             TextView a = new TextView(view.getContext());
             TextViews.add(a);
 
@@ -133,11 +133,13 @@ public class FirstFragment extends Fragment {
             }
             */
 
+
         }
         else
         {
             //notesIndex = savedInstanceState.getInt("notesIndex");
             //Recreate notes
+            /*
             for (int i = 0; i < 1; i++) {
                 TextView a = new TextView(view.getContext());
                 a.setText("Muisti on tyhjä, indeksi on: " + notesIndex);
@@ -146,18 +148,10 @@ public class FirstFragment extends Fragment {
                 myLayout.addView(a);
                 //et2.setVisibility(View.VISIBLE);
             }
+            */
 
         }
         //endregion
-
-
-        TextView b = new TextView(view.getContext());
-        b.setText("Tämä on uusi");
-        b.setHeight(150);
-        b.setGravity(Gravity.CENTER);
-        myLayout.addView(b);
-        TextViews.add(b);
-
 
         //Add text button
         clickButton.setOnClickListener(new View.OnClickListener() {
@@ -171,64 +165,81 @@ public class FirstFragment extends Fragment {
                 //Works only here, not in it's own method, no idea why
                 final LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
 
-                //et.setVisibility(View.VISIBLE);
-                //et2.setVisibility(View.VISIBLE);
-                //AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                //builder.setTitle("Title");
-
-                // Set up the input/
-                //final EditText input = new EditText(getContext());
-                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-                //input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                //input.setInputType(InputType.TYPE_CLASS_TEXT);
-                // Set up the input/
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Title");
                 final EditText input = new EditText(getContext());
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
                 builder.setView(input);
 
+
+                // Set up the buttons
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        addViewToLayout(view, myLayout);
+
+
+                        notesIndex = new Integer(notesIndex + 1);
+                        noteText = input.getText().toString();
+                        TextView a = new TextView(view.getContext());
+                        //a.setText("Tämä on luotu juuri nyt, indeksi on: " +notesIndex);
+                        //a.setText(noteText + " , indeksi: " +notesIndex);
+                        //a.setHeight(150);
+                        //a.setGravity(Gravity.CENTER);
+                        //myLayout.addView(a);
+                        //TextViews.add(a);
+                        //noteTexts.add(noteText);
+
+
+                        addViewToLayout(view, myLayout,noteText);
                     }
                 });
 
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
 
+                builder.show();
             }
 
         });
 
-
-
-
-
         return view;
     }
 
-    void addViewToLayout(View view, final LinearLayout myLayout){
+
+    void addViewToLayout(View view, final LinearLayout myLayout, String text){
 
         // Set up the input/
+
+        /*
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         final EditText input = new EditText(getContext());
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
+
         notesIndex = new Integer(notesIndex + 1);
         noteText = input.getText().toString();
+        */
+
         TextView a = new TextView(view.getContext());
+
         a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showAlertToDelete(v, myLayout);
             }
         });
-        a.setText("wadwadwad" +noteText);
+
+        a.setText(text);
         a.setHeight(150);
         a.setGravity(Gravity.CENTER);
         myLayout.addView(a);
         TextViews.add(a);
-        noteTexts.add(noteText);
+        noteTexts.add(text);
     }
 
 
@@ -330,11 +341,6 @@ public class FirstFragment extends Fragment {
 
         builder.show();
     }
-
-
-
-
-
 
 
     //Store data here
