@@ -57,8 +57,10 @@ public class FirstFragment extends Fragment {
     //Variables
     public List<TextView> TextViews = new ArrayList<TextView>();
     public int notesIndex;
-    public int textViewsSize;
+    public int textViewsCount;
+
     private String noteText = "";
+    public String tValue;
     public String[] noteTextsArray = new String[10];
     public ArrayList<String> noteTexts = new ArrayList<String>();
     public String savedText;
@@ -87,30 +89,43 @@ public class FirstFragment extends Fragment {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-
-
+        //Reset TextViews-list
         String testString = "";
+        textViewsCount = TextViews.size();
+        TextViews.clear();
+
+        //notesIndex = 0;
+        //notesIndex = sharedPreferences.getInt("notesIndex", 0);
+
+
         //region get saved data
+        //Only gets called if the app is turned off for a long time.
         super.onCreate(savedInstanceState);
         if(savedInstanceState != null)
         {
             notesIndex = savedInstanceState.getInt("notesIndex");
-            textViewsSize = savedInstanceState.getInt("textViewsSize");
-            testString = savedInstanceState.getString("textValue0");
+            textViewsCount = savedInstanceState.getInt("textViewsCount");
+            tValue = savedInstanceState.getString("textValue0","DEFAULT");
             addViewToLayout(view, myLayout,"Muistissa oli jotain");
         }
 
-        if (notesIndex > 0)
+
+        if (textViewsCount > 0)
         {
             addViewToLayout(view, myLayout,"Muistissa oli jotain" +notesIndex);
-            addViewToLayout(view, myLayout,"Tekstikenttiä oli: " +TextViews.size());
+            addViewToLayout(view, myLayout,"Tekstikenttiä oli: " +textViewsCount);
+
+            //tValue = sharedPreferences.getString("textValue0","DEFAULT");
+            addViewToLayout(view, myLayout, "Testin pitäisi olla perässä: " +tValue);
 
             //recreate all notes
-            for (int i=0; i < notesIndex; i++)
+            /*
+            for (int i=0; i < textViewsCount; i++)
             {
                 String tValue = sharedPreferences.getString("textValue0","DEFAULT");
                 addViewToLayout(view, myLayout, "Testin pitäisi olla perässä: " +tValue);
             }
+            */
         }
 
         //if created the first time
@@ -119,6 +134,8 @@ public class FirstFragment extends Fragment {
             addViewToLayout(view, myLayout,"Welcome! Please add a note from the button above.");
         }
         //endregion
+
+
 
         //Add text button
         clickButton.setOnClickListener(new View.OnClickListener() {
@@ -143,11 +160,7 @@ public class FirstFragment extends Fragment {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        notesIndex = new Integer(notesIndex + 1);
                         noteText = input.getText().toString();
-
-
                         noteTextsArray[0]=noteText;
                         addViewToLayout(view, myLayout,noteText);
                     }
@@ -187,6 +200,7 @@ public class FirstFragment extends Fragment {
                 showAlertToDelete(v, myLayout);
             }
         });
+        notesIndex = new Integer(notesIndex + 1);
         a.setText(text);
         a.setHeight(150);
         a.setGravity(Gravity.CENTER);
@@ -205,6 +219,8 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 myLayout.removeView(v);
+                TextViews.remove(v);
+                notesIndex =- 1;
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -216,8 +232,6 @@ public class FirstFragment extends Fragment {
 
         builder.show();
     }
-
-
 
     public void onButtonPressed(String uri) {
         if (listener != null) {
@@ -234,7 +248,6 @@ public class FirstFragment extends Fragment {
             throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
-
 
     @Override
     public void onDetach() {
@@ -256,9 +269,9 @@ public class FirstFragment extends Fragment {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        //editor.putInt("notesIndex", notesIndex);
+
         editor.putInt("notesIndex", notesIndex);
-        editor.putInt("textViewsSize", TextViews.size());
+        editor.putInt("textViewsCount", TextViews.size());
 
         /*
         int index = 0;
@@ -269,7 +282,7 @@ public class FirstFragment extends Fragment {
         }
         */
 
-        editor.putString("textValue0","wadaw");
+       // editor.putString("textValue0","wadaw");
         editor.commit();
 
     }
@@ -291,9 +304,9 @@ public class FirstFragment extends Fragment {
             index = index +1;
         }
 
-        editor.commit();
+        editor.putInt("textViewsSize", TextViews.size());
         savedInstanceState.putInt("notesIndex", notesIndex);
-        //savedInstanceState.putString("textValue0", "testi");
+        savedInstanceState.putString("textValue0", "testiiiiiii");
 
         //editor.putInt("notesIndex", notesIndex);
         //editor.putString("textValue0", "testi");
