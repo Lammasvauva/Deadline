@@ -131,7 +131,8 @@ public class FirstFragment extends Fragment {
                         a.setHeight(150);
                         a.setGravity(Gravity.CENTER);
                         myLayout.addView(a);
-                        //a.setBackground();
+                        //a.setBackground(text_box.xml);
+
 
                         //Add to list
                         TextViewNotes.add(a);
