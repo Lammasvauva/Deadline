@@ -204,6 +204,11 @@ public class FirstFragment extends Fragment {
         a.setText(text);
         a.setHeight(150);
         a.setGravity(Gravity.CENTER);
+
+
+        a.setBackgroundResource(R.drawable.rounded_corner);
+
+
         myLayout.addView(a);
         TextViews.add(a);
         noteTexts.add(text);
