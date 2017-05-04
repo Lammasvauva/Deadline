@@ -58,6 +58,7 @@ public class FirstFragment extends Fragment {
     public List<TextView> TextViews = new ArrayList<TextView>();
     public int notesIndex;
     public int textViewsCount;
+    public int index;
 
     private String noteText = "";
     public String tValue;
@@ -103,35 +104,38 @@ public class FirstFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if(savedInstanceState != null)
         {
+            /*
             notesIndex = savedInstanceState.getInt("notesIndex");
             textViewsCount = savedInstanceState.getInt("textViewsCount");
             tValue = savedInstanceState.getString("textValue0","DEFAULT");
             addViewToLayout(view, myLayout,"Muistissa oli jotain");
+            */
         }
 
 
         if (textViewsCount > 0)
         {
-            addViewToLayout(view, myLayout,"Muistissa oli jotain" +notesIndex);
-            addViewToLayout(view, myLayout,"Tekstikenttiä oli: " +textViewsCount);
-
-            //tValue = sharedPreferences.getString("textValue0","DEFAULT");
-            addViewToLayout(view, myLayout, "Testin pitäisi olla perässä: " +tValue);
-
-            //recreate all notes
-            /*
             for (int i=0; i < textViewsCount; i++)
             {
-                String tValue = sharedPreferences.getString("textValue0","DEFAULT");
-                addViewToLayout(view, myLayout, "Testin pitäisi olla perässä: " +tValue);
+                String tValue = sharedPreferences.getString("textValue" + String.valueOf(i),"DEFAULT");
+                addViewToLayout(view, myLayout, "" +tValue);
+
             }
-            */
+
+            //tValue = sharedPreferences.getString("textValue0","DEFAULT");
+            //addViewToLayout(view, myLayout, "Testin pitäisi olla perässä: " +tValue);
+
+            //addViewToLayout(view, myLayout,"Muistissa oli jotain" +notesIndex);
+            //addViewToLayout(view, myLayout,"Tekstikenttiä oli: " +textViewsCount);
+
+            //recreate all notes
+
         }
 
         //if created the first time
         else
         {
-            addViewToLayout(view, myLayout,"Welcome! Please add a note from the button above.");
+            //addViewToLayout(view, myLayout,"Welcome! Please add a note from the button above.");
         }
         //endregion
 
@@ -200,18 +204,46 @@ public class FirstFragment extends Fragment {
                 showAlertToDelete(v, myLayout);
             }
         });
-        notesIndex = new Integer(notesIndex + 1);
+
         a.setText(text);
         a.setHeight(150);
         a.setGravity(Gravity.CENTER);
-
-
         a.setBackgroundResource(R.drawable.rounded_corner);
+
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //editor.putString("textValue" + String.valueOf(notesIndex), text);
+
+
+        editor.putString("textValue" + String.valueOf(textViewsCount), text);
+        notesIndex = new Integer(notesIndex + 1);
+        //editor.putString("textValue0", text);
+        editor.commit();
+
+        index = index +1;
 
 
         myLayout.addView(a);
         TextViews.add(a);
         noteTexts.add(text);
+    }
+
+    void addViewToLayoutFromMemory(View view, final LinearLayout myLayout, String text){
+        TextView a = new TextView(view.getContext());
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertToDelete(v, myLayout);
+            }
+        });
+
+        a.setText(text);
+        a.setHeight(150);
+        a.setGravity(Gravity.CENTER);
+        a.setBackgroundResource(R.drawable.rounded_corner);
+
+        myLayout.addView(a);
     }
 
 
@@ -301,13 +333,14 @@ public class FirstFragment extends Fragment {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-
+/*
         int index = 0;
         for (TextView text:TextViews)
         {
             editor.putString("textValue" + String.valueOf(index), text.getText().toString());
             index = index +1;
         }
+        */
 
         editor.putInt("textViewsSize", TextViews.size());
         savedInstanceState.putInt("notesIndex", notesIndex);
