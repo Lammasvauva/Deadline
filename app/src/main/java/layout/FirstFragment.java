@@ -112,7 +112,7 @@ public class FirstFragment extends Fragment {
 
         if (textViewsCount > 0)
         {
-            addViewToLayout(view, myLayout,"Muistissa oli jotain" +notesIndex);
+            addViewToLayout(view, myLayout,"Notejen indeksi on: " +notesIndex);
             addViewToLayout(view, myLayout,"Tekstikenttiä oli: " +textViewsCount);
 
             //tValue = sharedPreferences.getString("textValue0","DEFAULT");
@@ -316,7 +316,7 @@ public class FirstFragment extends Fragment {
         //editor.putInt("notesIndex", notesIndex);
         //editor.putString("textValue0", "testi");
         editor.commit();
-    }
+    }   
 
 
 
