@@ -39,15 +39,6 @@
                 android:drawableTop="@mipmap/add_button_plus"
                 android:paddingTop="5dp" />
 
-            <EditText
-                android:id="@+id/addTextLine2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:visibility="gone" />
-
         </LinearLayout>
     </ScrollView>
 
