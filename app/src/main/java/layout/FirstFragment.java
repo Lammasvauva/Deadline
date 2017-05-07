@@ -132,7 +132,7 @@ public class FirstFragment extends Fragment {
         //if created the first time
         else
         {
-           addViewToLayoutFromMemory(view, myLayout,"Welcome! Please add a note from the button above.");
+           addViewToLayoutFromMemory(view, myLayout,"Welcome! Please add a note from the button below.");
         }
         //endregion
 
@@ -141,7 +141,7 @@ public class FirstFragment extends Fragment {
         //Add text button
         clickButton.setOnClickListener(new View.OnClickListener() {
 
-            EditText et = (EditText) view.findViewById(R.id.addTextLine1);
+          //  EditText et = (EditText) view.findViewById(R.id.addTextLine1);
 
             @Override
             //Put button functionality here

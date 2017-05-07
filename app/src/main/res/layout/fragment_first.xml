@@ -7,40 +7,38 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <EditText
-        android:id="@+id/addTextLine1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:visibility="gone" />
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <LinearLayout
             android:id="@+id/linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
-            android:weightSum="1">
+            android:baselineAligned="false"
+            android:orientation="vertical"><![CDATA[
 
-            <Button
-                android:id="@+id/addbutton_whiteboard"
-                android:layout_width="68dp"
-                android:layout_height="59dp"
 
-                android:layout_weight="0"
-                android:background="@null"
-                android:drawableTint="@color/colorPrimaryDark"
-                android:drawableTop="@mipmap/add_button_plus"
-                android:paddingTop="5dp" />
+            />
 
-        </LinearLayout>
+        ]]></LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/addbutton_whiteboard"
+        android:layout_width="62dp"
+        android:layout_height="51dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="200dp"
+        android:layout_weight="0"
+        android:background="@null"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:drawableTop="@mipmap/add_button_plus"
+        android:elevation="0dp"
+        android:paddingTop="5dp"
+        android:visibility="visible" />
 
 
 </FrameLayout>
