@@ -131,7 +131,7 @@ public class FirstFragment extends Fragment {
         //if created the first time
         else
         {
-           // addViewToLayoutFromMemory(view, myLayout,"Welcome! Please add a note from the button above.");
+           addViewToLayoutFromMemory(view, myLayout,"Welcome! Please add a note from the button above.");
         }
         //endregion
 
@@ -222,7 +222,7 @@ public class FirstFragment extends Fragment {
         a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlertToDelete(v, myLayout);
+                showAlertToDeleteWELCOME(v, myLayout);
             }
         });
 
@@ -230,7 +230,6 @@ public class FirstFragment extends Fragment {
         a.setHeight(150);
         a.setGravity(Gravity.CENTER);
         a.setBackgroundResource(R.drawable.rounded_corner);
-
         myLayout.addView(a);
     }
 
@@ -263,6 +262,29 @@ public class FirstFragment extends Fragment {
                 editor.commit();
 
 
+
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+
+    void showAlertToDeleteWELCOME(final View v, final LinearLayout myLayout){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Delete?");
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                myLayout.removeView(v);
 
             }
         });
