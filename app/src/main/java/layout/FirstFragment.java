@@ -118,24 +118,20 @@ public class FirstFragment extends Fragment {
             for (int i=0; i < textViewsCount; i++)
             {
                 String tValue = sharedPreferences.getString("textValue" + String.valueOf(i),"DEFAULT");
+                //addViewToLayout(view, myLayout, "" +tValue);
                 addViewToLayout(view, myLayout, "" +tValue);
-
             }
-
             //tValue = sharedPreferences.getString("textValue0","DEFAULT");
             //addViewToLayout(view, myLayout, "Testin pitäisi olla perässä: " +tValue);
-
             //addViewToLayout(view, myLayout,"Muistissa oli jotain" +notesIndex);
             //addViewToLayout(view, myLayout,"Tekstikenttiä oli: " +textViewsCount);
-
             //recreate all notes
-
         }
 
         //if created the first time
         else
         {
-            //addViewToLayout(view, myLayout,"Welcome! Please add a note from the button above.");
+           // addViewToLayoutFromMemory(view, myLayout,"Welcome! Please add a note from the button above.");
         }
         //endregion
 
@@ -176,15 +172,11 @@ public class FirstFragment extends Fragment {
                         dialog.cancel();
                     }
                 });
-
                 builder.show();
             }
-
         });
-
         return view;
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -194,7 +186,6 @@ public class FirstFragment extends Fragment {
         }
 
     }
-
 
     void addViewToLayout(View view, final LinearLayout myLayout, String text){
         TextView a = new TextView(view.getContext());
@@ -215,15 +206,12 @@ public class FirstFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         //editor.putString("textValue" + String.valueOf(notesIndex), text);
 
-
-        editor.putString("textValue" + String.valueOf(textViewsCount), text);
+        editor.putString("textValue" + String.valueOf(TextViews.size()), text);
         notesIndex = new Integer(notesIndex + 1);
         //editor.putString("textValue0", text);
         editor.commit();
 
         index = index +1;
-
-
         myLayout.addView(a);
         TextViews.add(a);
         noteTexts.add(text);
@@ -257,7 +245,25 @@ public class FirstFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 myLayout.removeView(v);
                 TextViews.remove(v);
+
                 notesIndex =- 1;
+
+                //ReWrite memory
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                index = 0;
+                for (TextView text:TextViews)
+                {
+                    editor.putString("textValue" + String.valueOf(index), text.getText().toString());
+                    index = index +1;
+                }
+
+
+                editor.commit();
+
+
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -303,13 +309,15 @@ public class FirstFragment extends Fragment {
         //state.putInt("notesIndex", notesIndex);
         //notesIndex = 0;
 
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-
+/*
         editor.putInt("notesIndex", notesIndex);
         editor.putInt("textViewsCount", TextViews.size());
 
+*/
         /*
         int index = 0;
         for (TextView text:TextViews)
@@ -324,6 +332,12 @@ public class FirstFragment extends Fragment {
 
     }
 
+
+
+    public void ReWriteMemory(String text)
+    {
+
+    }
 
     //Store data here
     @Override
