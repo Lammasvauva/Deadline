@@ -55,13 +55,15 @@ import static android.R.id.input;
 public class FirstFragment extends Fragment {
 
     //Variables
-    List<TextView> TextViews = new ArrayList<TextView>();
+    public List<TextView> TextViews = new ArrayList<TextView>();
     public int notesIndex;
-    private String noteText = "";
+    public int textViewsCount;
+    public int index;
 
-    //Lists for saving
-    //private String[] noteTexts;
-    ArrayList<String> noteTexts = new ArrayList<String>();
+    private String noteText = "";
+    public String tValue;
+    public String[] noteTextsArray = new String[10];
+    public ArrayList<String> noteTexts = new ArrayList<String>();
     public String savedText;
 
 
@@ -76,19 +78,6 @@ public class FirstFragment extends Fragment {
         return new FirstFragment();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if(savedInstanceState != null)
-        {
-            notesIndex = savedInstanceState.getInt("notesIndex");
-            // savedText = prefs.getString("noteText", "TÄMÄ EI PAHA POIS");
-            //noteTexts = savedInstanceState.getStringArray("noteTexts");
-        }
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String tValue = sharedPreferences.getString("textvalue","");
-    }
 
 
     @Override
@@ -96,62 +85,57 @@ public class FirstFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_first, container, false);
         Button clickButton = (Button) view.findViewById(R.id.addbutton_whiteboard);
+        final LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
+
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        //Reset TextViews-list
+        String testString = "";
+        textViewsCount = TextViews.size();
+        TextViews.clear();
+
+        //notesIndex = 0;
+        //notesIndex = sharedPreferences.getInt("notesIndex", 0);
 
 
         //region get saved data
+        //Only gets called if the app is turned off for a long time.
         super.onCreate(savedInstanceState);
         if(savedInstanceState != null)
-        {notesIndex = savedInstanceState.getInt("notesIndex");}
-
-        final LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
-        //EditText et2 = (EditText) view.findViewById(R.id.addTextLine2);
-        //if created the first time
-        if (notesIndex > 0)
         {
+            /*
+            notesIndex = savedInstanceState.getInt("notesIndex");
+            textViewsCount = savedInstanceState.getInt("textViewsCount");
+            tValue = savedInstanceState.getString("textValue0","DEFAULT");
             addViewToLayout(view, myLayout,"Muistissa oli jotain");
-
-            /*
-            TextView a = new TextView(view.getContext());
-            TextViews.add(a);
-
-            a.setText("Muistista luku onnistui, indeksi on: " + notesIndex);
-            //a.setText(savedText);
-            a.setHeight(150);
-            a.setGravity(Gravity.CENTER);
-            myLayout.addView(a);
-            //et2.setVisibility(View.VISIBLE);
-
-
-            /*
-            for (String text: noteTexts)
-            {
-                TextView a = new TextView(view.getContext());
-                a.setText("" + text);
-                a.setHeight(150);
-                a.setGravity(Gravity.CENTER);
-                myLayout.addView(a);
-            }
             */
-
-
         }
+
+
+        if (textViewsCount > 0)
+        {
+            for (int i=0; i < textViewsCount; i++)
+            {
+                String tValue = sharedPreferences.getString("textValue" + String.valueOf(i),"DEFAULT");
+                //addViewToLayout(view, myLayout, "" +tValue);
+                addViewToLayout(view, myLayout, "" +tValue);
+            }
+            //tValue = sharedPreferences.getString("textValue0","DEFAULT");
+            //addViewToLayout(view, myLayout, "Testin pitäisi olla perässä: " +tValue);
+            //addViewToLayout(view, myLayout,"Muistissa oli jotain" +notesIndex);
+            //addViewToLayout(view, myLayout,"Tekstikenttiä oli: " +textViewsCount);
+            //recreate all notes
+        }
+
+        //if created the first time
         else
         {
-            //notesIndex = savedInstanceState.getInt("notesIndex");
-            //Recreate notes
-            /*
-            for (int i = 0; i < 1; i++) {
-                TextView a = new TextView(view.getContext());
-                a.setText("Muisti on tyhjä, indeksi on: " + notesIndex);
-                a.setHeight(150);
-                a.setGravity(Gravity.CENTER);
-                myLayout.addView(a);
-                //et2.setVisibility(View.VISIBLE);
-            }
-            */
-
+           addViewToLayoutFromMemory(view, myLayout,"Welcome! Please add a note from the button above.");
         }
         //endregion
+
+
 
         //Add text button
         clickButton.setOnClickListener(new View.OnClickListener() {
@@ -176,20 +160,8 @@ public class FirstFragment extends Fragment {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-
-                        notesIndex = new Integer(notesIndex + 1);
                         noteText = input.getText().toString();
-                        TextView a = new TextView(view.getContext());
-                        //a.setText("Tämä on luotu juuri nyt, indeksi on: " +notesIndex);
-                        //a.setText(noteText + " , indeksi: " +notesIndex);
-                        //a.setHeight(150);
-                        //a.setGravity(Gravity.CENTER);
-                        //myLayout.addView(a);
-                        //TextViews.add(a);
-                        //noteTexts.add(noteText);
-
-
+                        noteTextsArray[0]=noteText;
                         addViewToLayout(view, myLayout,noteText);
                     }
                 });
@@ -200,33 +172,23 @@ public class FirstFragment extends Fragment {
                         dialog.cancel();
                     }
                 });
-
                 builder.show();
             }
-
         });
-
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if(savedInstanceState != null)
+        {
+        }
+
+    }
 
     void addViewToLayout(View view, final LinearLayout myLayout, String text){
-
-        // Set up the input/
-
-        /*
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        final EditText input = new EditText(getContext());
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-
-
-        notesIndex = new Integer(notesIndex + 1);
-        noteText = input.getText().toString();
-        */
-
         TextView a = new TextView(view.getContext());
-
         a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,9 +199,38 @@ public class FirstFragment extends Fragment {
         a.setText(text);
         a.setHeight(150);
         a.setGravity(Gravity.CENTER);
+        a.setBackgroundResource(R.drawable.rounded_corner);
+
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //editor.putString("textValue" + String.valueOf(notesIndex), text);
+
+        editor.putString("textValue" + String.valueOf(TextViews.size()), text);
+        notesIndex = new Integer(notesIndex + 1);
+        //editor.putString("textValue0", text);
+        editor.commit();
+
+        index = index +1;
         myLayout.addView(a);
         TextViews.add(a);
         noteTexts.add(text);
+    }
+
+    void addViewToLayoutFromMemory(View view, final LinearLayout myLayout, String text){
+        TextView a = new TextView(view.getContext());
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertToDeleteWELCOME(v, myLayout);
+            }
+        });
+
+        a.setText(text);
+        a.setHeight(150);
+        a.setGravity(Gravity.CENTER);
+        a.setBackgroundResource(R.drawable.rounded_corner);
+        myLayout.addView(a);
     }
 
 
@@ -252,6 +243,26 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 myLayout.removeView(v);
+                TextViews.remove(v);
+
+                notesIndex =- 1;
+
+                //ReWrite memory
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                index = 0;
+                for (TextView text:TextViews)
+                {
+                    editor.putString("textValue" + String.valueOf(index), text.getText().toString());
+                    index = index +1;
+                }
+
+
+                editor.commit();
+
+
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -265,16 +276,27 @@ public class FirstFragment extends Fragment {
     }
 
 
+    void showAlertToDeleteWELCOME(final View v, final LinearLayout myLayout){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Delete?");
 
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                myLayout.removeView(v);
 
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
 
-    public void CreateTextViewListener(LayoutInflater inflater, ViewGroup container)
-    {
-
-
-
+        builder.show();
     }
-
 
     public void onButtonPressed(String uri) {
         if (listener != null) {
@@ -292,7 +314,6 @@ public class FirstFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onDetach() {
         super.onDetach();
@@ -307,63 +328,62 @@ public class FirstFragment extends Fragment {
     public void onPause(Bundle state)
     {
         super.onSaveInstanceState(state);
-        state.putInt("notesIndex", notesIndex);
+        //state.putInt("notesIndex", notesIndex);
+        //notesIndex = 0;
 
-    }
-
-
-    public void CreateWhiteboardNote() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Title");
-
-        // Set up the input
-        final EditText input = new EditText(getContext());
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        //input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-
-        // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                noteText = input.getText().toString();
-
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
-
-
-    //Store data here
-    @Override
-    public void onSaveInstanceState(Bundle state) {
-        super.onSaveInstanceState(state);
-        state.putInt("notesIndex", notesIndex);
-        //state.putStringArray("noteTexts", noteTexts);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+/*
+        editor.putInt("notesIndex", notesIndex);
+        editor.putInt("textViewsCount", TextViews.size());
+
+*/
+        /*
         int index = 0;
         for (TextView text:TextViews)
         {
-            //editor.putString("Textvalue" + String.valueOf(notesIndex), text.getText().toString());
-            editor.putString("Textvalue" + String.valueOf(index), text.getText().toString());
+            editor.putString("textValue" + String.valueOf(index), text.getText().toString());
             index = index +1;
         }
+        */
 
-        notesIndex = TextViews.size();
-        editor.putInt("notesIndex", notesIndex);
+       // editor.putString("textValue0","wadaw");
+        editor.commit();
 
+    }
+
+
+
+    public void ReWriteMemory(String text)
+    {
+
+    }
+
+    //Store data here
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+/*
+        int index = 0;
+        for (TextView text:TextViews)
+        {
+            editor.putString("textValue" + String.valueOf(index), text.getText().toString());
+            index = index +1;
+        }
+        */
+
+        editor.putInt("textViewsSize", TextViews.size());
+        savedInstanceState.putInt("notesIndex", notesIndex);
+        savedInstanceState.putString("textValue0", "testiiiiiii");
+
+        //editor.putInt("notesIndex", notesIndex);
+        //editor.putString("textValue0", "testi");
         editor.commit();
     }
 
