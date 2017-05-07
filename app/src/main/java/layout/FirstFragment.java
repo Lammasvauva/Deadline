@@ -57,6 +57,7 @@ public class FirstFragment extends Fragment {
     //Variables
     public List<TextView> TextViews = new ArrayList<TextView>();
     public int notesIndex;
+
     public int textViewsCount;
     public int index;
 
