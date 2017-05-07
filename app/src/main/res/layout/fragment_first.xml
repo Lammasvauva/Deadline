@@ -24,16 +24,29 @@
             android:id="@+id/linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="vertical"
+            android:gravity="center"
             android:weightSum="1">
 
             <Button
                 android:id="@+id/addbutton_whiteboard"
-                android:layout_width="wrap_content"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:drawableTop="@drawable/ic_add_circle_black_96dp"
+                android:paddingTop="0dp"
+                android:drawableTint="@color/colorPrimaryDark"
+
+                />
+
+            <EditText
+                android:id="@+id/addTextLine2"
+                android:visibility="gone"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:text="Add" />
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"
+                />
 
         </LinearLayout>
     </ScrollView>
