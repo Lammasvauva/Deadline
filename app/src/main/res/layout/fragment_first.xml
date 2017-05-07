@@ -16,8 +16,9 @@
             android:id="@+id/linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_margin="20dp"
             android:baselineAligned="false"
+            android:gravity="center"
             android:orientation="vertical"><![CDATA[
 
 

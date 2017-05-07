@@ -24,6 +24,7 @@
         
         <activity android:name="layout.Pop">
             </activity>
+
         
     </application>
 

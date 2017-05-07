@@ -12,6 +12,6 @@
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:colorBackground">@color/background_material_light</item>
         <item name="android:colorForeground">@color/colorPrimary</item>
-        <item name="android:statusBarColor">?android:attr/colorPrimary</item>
+        <item name="android:statusBarColor">?android:attr/colorControlActivated</item>
     </style>
 </resources>

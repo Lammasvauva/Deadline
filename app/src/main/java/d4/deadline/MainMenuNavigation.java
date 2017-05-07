@@ -50,6 +50,10 @@ SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractio
         transaction_1.replace(R.id.fragment_container, fragment_2);
         transaction_1.commit();
 
+
+
+
+
         //NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
 
         mTextMessage = (TextView) findViewById(R.id.message);

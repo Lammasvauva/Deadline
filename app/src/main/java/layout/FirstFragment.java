@@ -89,6 +89,9 @@ public class FirstFragment extends Fragment {
         final LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
 
 
+        getActivity().setTitle("Notes");
+
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         //Reset TextViews-list
@@ -199,6 +202,7 @@ public class FirstFragment extends Fragment {
 
         a.setText(text);
         a.setHeight(150);
+        a.setTextSize(15);
         a.setGravity(Gravity.CENTER);
         a.setBackgroundResource(R.drawable.rounded_corner);
 
@@ -229,6 +233,7 @@ public class FirstFragment extends Fragment {
 
         a.setText(text);
         a.setHeight(150);
+        a.setTextSize(15);
         a.setGravity(Gravity.CENTER);
         a.setBackgroundResource(R.drawable.rounded_corner);
         myLayout.addView(a);
