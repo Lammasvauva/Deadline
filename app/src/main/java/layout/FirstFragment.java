@@ -247,7 +247,7 @@ public class FirstFragment extends Fragment {
                 TextViews.remove(v);
 
                 notesIndex =- 1;
-
+//
                 //ReWrite memory
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
