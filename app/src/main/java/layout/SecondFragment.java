@@ -15,7 +15,7 @@ import android.widget.CalendarView;
 
 import java.util.Calendar;
 
-import d4.deadline.R;
+import com.d4.deadline.R;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import d4.deadline.R;
+import com.d4.deadline.R;
 
 /**
  * A simple {@link Fragment} subclass.

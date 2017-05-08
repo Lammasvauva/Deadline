@@ -14,4 +14,63 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="title_activity_sign_in">Sign-in</string>
+    <string name="sign_in_succeeded_message_format">"Sign-in with %s succeeded."</string>
+    <string name="sign_in_canceled_message_format">"Sign-in with %s canceled."</string>
+    <string name="sign_in_failure_dialog_title">Sign-In Error</string>
+    <string name="sign_in_failure_message_format">Sign-in with %1$s failed.\n%2$s</string>
+
+
+    <!-- CUSTOMIZE THESE FOR YOUR APP -->
+
+
+
+    <!-- REQUIRED FOR GENERAL APP FUNCTIONALITY - YOU MAY WANT TO KEEP THESE -->
+
+    <string name="main_nav_menu_item_home">Home</string>
+    <string name="title_activity_item_detail">Item Detail</string>
+    <string name="title_activity_item_list">Item List</string>
+    <string name="title_activity_main">@string/app_name</string>
+    <string name="button_text_sign_in">SIGN IN</string>
+    <string name="button_text_sign_out">SIGN OUT</string>
+
+    <string name="main_nav_menu_default_user_text">\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020</string>
+
+    <!-- USED BY DEMO FEATURES ONLY - YOU CAN DISCARD THESE WITH THE DEMO FOLDER -->
+
+    <string name="fragment_demo_instruction_overview_header">Overview</string>
+    <string name="fragment_demo_instruction_description_header">Sample App Features</string>
+    <string name="feature_sign_in_title">User Sign-in</string>
+    <string name="feature_sign_in_subtitle">Let your users sign in with public identity providers or your own identity system.</string>
+    <string name="feature_sign_in_overview">Whether your users sign in or not, the User sign-in feature configures Amazon Cognito to uniquely identify the user and provide your app the appropriate credentials to access your AWS resources.</string>
+    <string name="feature_sign_in_description">The Sample App demonstrates assignment of a unique identifier for the user, the Amazon Cognito User ID. If optional or mandatory User Sign-in has been enabled in your project, then the Sample App also includes a sign-in screen, with a button for each configured sign-in provider.</string>
+    <string name="feature_sign_in_powered_by">Powered by Amazon Cognito</string>
+    <string name="feature_sign_in_demo_button">Demo User Identity</string>
+
+    <string name="main_fragment_title_user_identity">User Identity</string>
+    <string name="main_fragment_subtitle_user_identity">Keep track of users</string>
+    <string name="identity_demo_text_view_description">Displays the user identity.</string>
+    <string name="unknown_user">Guest User</string>
+    <string name="user_id">USER IDENTIFIER</string>
+    <string name="identity_demo_textview_username_description">User\'s name</string>
+    <string name="identity_demo_textview_userid_description">User\'s unique identifier</string>
+    <string name="identity_demo_unknown_identity_text">&lt;UNKNOWN IDENTITY&gt;</string>
+    <string name="identity_demo_dialog_dismiss_text">DISMISS</string>
+    <string name="identity_demo_error_dialog_title">Failed Identity Retrieval</string>
+    <string name="identity_demo_error_message_failed_get_identity">Could not retrieve the user identity:\u0020</string>
 </resources>
