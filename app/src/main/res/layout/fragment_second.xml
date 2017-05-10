@@ -1,54 +1,38 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    tools:context="layout.SecondFragment"
-    tools:targetApi="11"
-    android:weightSum="1">
+    tools:context="layout.ThirdFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <FrameLayout
+
+    <Button
+        android:id="@+id/AddEventButton_calendar"
+        android:layout_width="62dp"
+        android:layout_height="51dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="200dp"
+        android:layout_weight="0"
+        android:background="@null"
+        android:drawableTint="@color/colorPrimary"
+        android:drawableTop="@mipmap/add_button_plus"
+        android:elevation="0dp"
+        android:visibility="visible" />
+
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:scrollbars="none">
 
-        <TextView
-            android:id="@+id/TopBar"
-            android:color="#000000"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            />
+        <RelativeLayout
+            android:id="@+id/RelativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/AddEventButton_calendar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:text="Add Event" />
+        </RelativeLayout>
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="423dp"
-            android:scrollbars="none">
-
-            <RelativeLayout
-                android:id="@+id/RelativeLayout"
-                android:layout_width="350dp"
-                android:layout_height="match_parent">
-
-            </RelativeLayout>
-        </HorizontalScrollView>
-
-    </FrameLayout>
+    </HorizontalScrollView>
 
 
-</LinearLayout>
+</FrameLayout>

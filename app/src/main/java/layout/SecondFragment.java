@@ -62,6 +62,11 @@ public class SecondFragment extends Fragment {
 
     private String eventText;
 
+    public List<Integer> eventDays = new ArrayList<Integer>();
+    public List<Integer> eventSizes = new ArrayList<Integer>();
+
+    public List<Integer> Sundays = new ArrayList<Integer>();
+
 
 
     public static SecondFragment newInstance() {
@@ -82,6 +87,9 @@ public class SecondFragment extends Fragment {
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setTitle("Timeline");
+
+        eventDays.clear();
+        eventSizes.clear();
 
         final View view = inflater.inflate(R.layout.fragment_second, container, false);
         //compactcalendar_view = (CompactCalendarView) V.findViewById(R.id.compactcalendar_view);
@@ -119,11 +127,59 @@ public class SecondFragment extends Fragment {
 
         int prevTextViewId = 0;
 
+        String dayName = c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        int dayNumber = c.get(Calendar.DAY_OF_MONTH);
+
+        int daysUntillSunday = 0;
+
+        switch (dayName)
+        {
+            case "Monday":
+                daysUntillSunday = 6;
+                break;
+            case "Tuesday":
+                daysUntillSunday = 5;
+                break;
+            case "Wednesday":
+                daysUntillSunday = 4;
+                break;
+            case "Thursday":
+                daysUntillSunday = 3;
+                break;
+            case "Friday":
+                daysUntillSunday = 2;
+                break;
+            case "Saturday":
+                daysUntillSunday = 1;
+                break;
+            case "Sunday":
+                daysUntillSunday = 7;
+                break;
+        }
+
+        int nextSunday = dayNumber+daysUntillSunday-1;
+
+        Sundays.add(nextSunday);
+        Sundays.add(nextSunday+7);
+        Sundays.add(nextSunday+14);
+        Sundays.add(nextSunday+21);
+        Sundays.add(nextSunday-7);
+        Sundays.add(nextSunday-14);
+        Sundays.add(nextSunday-21);
+
+
+
+
+
+
+
+
         for (int i = 0; i <daysInMonth; i++   )
         {
             final TextView textv = new TextView(view.getContext());
 
             textv.setText((i+1)+"."+ mm);
+            //textv.setText(dayName);
             textv.setTextColor(Color.BLACK);
 
             int curTextViewId = prevTextViewId + 1;
@@ -136,10 +192,17 @@ public class SecondFragment extends Fragment {
             //if (curTextViewId > 1)
            // {params.leftMargin=140;}
 
-            textv.setWidth(200);
+            if (Sundays.contains(i))
+            {
+                textv.setBackgroundResource(R.drawable.date_timeline_sunday);
+            }
+            else
+            {textv.setBackgroundResource(R.drawable.date_timeline);}
+
+
+            textv.setWidth(150);
             textv.setHeight(50);
             textv.setGravity(Gravity.CENTER);
-            textv.setBackgroundResource(R.drawable.date_timeline);
             textv.setLayoutParams(params);
 
             prevTextViewId = curTextViewId;
@@ -233,10 +296,13 @@ public class SecondFragment extends Fragment {
         int dd = c.get(Calendar.DAY_OF_MONTH);
         final int daysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         int prevTextViewId = 0;
+        int sizePicker = 0;
+
 
         for (int i = 0; i <daysInMonth; i++   )
         {
             final TextView textv = new TextView(view.getContext());
+
 
             textv.setText((i+1)+"."+ mm);
             textv.setTextColor(Color.BLACK);
@@ -248,16 +314,30 @@ public class SecondFragment extends Fragment {
 
             params.addRule(RelativeLayout.RIGHT_OF, prevTextViewId);
 
-            //if (curTextViewId > 1)
-            // {params.leftMargin=140;}
 
-            if(i == (eventDay-1))
-            {
-                textv.setWidth(350);
 
-            }
-            else
-            {textv.setWidth(200);}
+
+                //if(i == (eventDay-1))
+                if(eventDays.contains(i+1))
+                {
+                    int size = eventSizes.get(sizePicker);
+
+                    if(size > 150)
+                    {textv.setWidth(size);}
+                    else
+                    {textv.setWidth(150);}
+
+
+                    sizePicker += 1;
+                }
+
+                else
+                {textv.setWidth(150);}
+
+
+
+
+
             textv.setHeight(50);
             textv.setGravity(Gravity.CENTER);
             textv.setBackgroundResource(R.drawable.date_timeline);
@@ -282,6 +362,9 @@ public class SecondFragment extends Fragment {
        // params2.leftMargin=10;
 
         textv.setText(text);
+        textv.setSingleLine(false);
+
+        textv.setTextSize(15);
         textv.setLayoutParams(params2);
         textv.setHeight(100);
         textv.setGravity(Gravity.CENTER);
@@ -289,7 +372,17 @@ public class SecondFragment extends Fragment {
 
         relativeLayout.addView(textv, params2);
 
+
+        textv.measure(0, 0);
+        int textWidth = textv.getMeasuredWidth();
+
+        eventDays.add(day);
+        eventSizes.add(textWidth);
+
         AddDatesToTimeline(view, relativeLayout, day);
+
+
+
     }
 
 

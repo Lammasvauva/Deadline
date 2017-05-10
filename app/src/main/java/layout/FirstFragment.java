@@ -11,6 +11,8 @@ import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.Layout;
 import android.view.Gravity;
@@ -89,6 +91,9 @@ public class FirstFragment extends Fragment {
         final LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
 
 
+        final ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setTitle("Whiteboard");
 
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());

@@ -36,10 +36,9 @@
         android:layout_marginTop="200dp"
         android:layout_weight="0"
         android:background="@null"
-        android:drawableTint="@color/colorPrimaryDark"
+        android:drawableTint="@color/colorPrimary"
         android:drawableTop="@mipmap/add_button_plus"
         android:elevation="0dp"
-        android:paddingTop="5dp"
         android:visibility="visible" />
 
 
