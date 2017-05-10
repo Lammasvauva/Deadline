@@ -6,22 +6,23 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-        </RelativeLayout>
-    </HorizontalScrollView>
-
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Third Fragment"
-        android:textColor="#000000" />
+        android:gravity="center">
+
+        <TextView
+
+            android:id="@+id/Development"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:padding="15dp"
+
+            android:text="Under development"
+            android:textColor="#000000" />
+    </RelativeLayout>
 
 </FrameLayout>

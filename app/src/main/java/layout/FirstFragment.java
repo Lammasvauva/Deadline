@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -208,6 +209,7 @@ public class FirstFragment extends Fragment {
         a.setHeight(150);
         a.setGravity(Gravity.CENTER);
         a.setBackgroundResource(R.drawable.rounded_corner);
+        a.setTextColor(Color.BLACK);
 
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -237,6 +239,7 @@ public class FirstFragment extends Fragment {
         a.setText(text);
         a.setHeight(150);
         a.setGravity(Gravity.CENTER);
+        a.setTextColor(Color.BLACK);
         a.setBackgroundResource(R.drawable.rounded_corner);
         myLayout.addView(a);
     }

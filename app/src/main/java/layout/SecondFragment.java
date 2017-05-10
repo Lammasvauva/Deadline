@@ -69,6 +69,8 @@ public class SecondFragment extends Fragment {
 
 
 
+
+
     public static SecondFragment newInstance() {
         return new SecondFragment();
     }
@@ -195,7 +197,6 @@ public class SecondFragment extends Fragment {
             if (Sundays.contains(i))
             {
                 textv.setBackgroundResource(R.drawable.date_timeline_sunday);
-
             }
             else
             {textv.setBackgroundResource(R.drawable.date_timeline);}
@@ -377,6 +378,7 @@ public class SecondFragment extends Fragment {
         textv.setHeight(100);
         textv.setGravity(Gravity.CENTER);
         textv.setBackgroundResource(R.drawable.timeline_note);
+        textv.setTextColor(Color.BLACK);
 
         relativeLayout.addView(textv, params2);
 
@@ -404,13 +406,7 @@ public class SecondFragment extends Fragment {
         relativeLayout.addView(textvSunday, params);
         */
         final Calendar c = Calendar.getInstance();
-        int yy = c.get(Calendar.YEAR);
-        int mm = c.get(Calendar.MONTH);
-        int dd = c.get(Calendar.DAY_OF_MONTH);
         final int daysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
-        int prevTextViewId = 0;
-        int sizePicker = 0;
-
 
         for (int i = 0; i <daysInMonth; i++   )
         {
@@ -419,10 +415,13 @@ public class SecondFragment extends Fragment {
                 final TextView textvSunday = new TextView(view.getContext());
                 final RelativeLayout.LayoutParams paramsSunday = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 paramsSunday.addRule(RelativeLayout.BELOW, i);
-                paramsSunday.addRule(RelativeLayout.ALIGN_START, i);
+                paramsSunday.addRule(RelativeLayout.ALIGN_END, i+1);
+
+                textvSunday.setBackgroundResource(R.drawable.date_timeline_sunday);
 
                 textvSunday.setLayoutParams(paramsSunday);
-                textvSunday.setHeight(800);
+                int size = 0;
+                textvSunday.setHeight(3000);
                 relativeLayout.addView(textvSunday, paramsSunday);
             }
         }

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import d4.deadline.R;
 
@@ -41,7 +42,6 @@ public class ThirdFragment extends Fragment {
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setTitle("Teams");
-
 
 
 
