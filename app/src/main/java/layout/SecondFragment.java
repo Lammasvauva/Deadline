@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.Xml;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +43,8 @@ import java.util.Locale;
 
 import d4.deadline.R;
 
+import static android.R.id.input;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -55,6 +59,10 @@ public class SecondFragment extends Fragment {
     private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
 
     private SecondFragment.OnFragmentInteractionListener listener;
+
+    private String eventText;
+
+
 
     public static SecondFragment newInstance() {
         return new SecondFragment();
@@ -97,18 +105,16 @@ public class SecondFragment extends Fragment {
         //params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
         //params.leftMargin = 107;
 
-
-
-
-
         final Calendar c = Calendar.getInstance();
         int yy = c.get(Calendar.YEAR);
         int mm = c.get(Calendar.MONTH);
         int dd = c.get(Calendar.DAY_OF_MONTH);
-        int daysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+        final int daysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         int margin = 0;
         List<TextView> TextViews = new ArrayList<TextView>();
+
+
 
 
         int prevTextViewId = 0;
@@ -127,10 +133,13 @@ public class SecondFragment extends Fragment {
 
             params.addRule(RelativeLayout.RIGHT_OF, prevTextViewId);
 
-            if (curTextViewId > 1)
-            {params.leftMargin=50;}
+            //if (curTextViewId > 1)
+           // {params.leftMargin=140;}
 
-
+            textv.setWidth(200);
+            textv.setHeight(50);
+            textv.setGravity(Gravity.CENTER);
+            textv.setBackgroundResource(R.drawable.date_timeline);
             textv.setLayoutParams(params);
 
             prevTextViewId = curTextViewId;
@@ -152,45 +161,23 @@ public class SecondFragment extends Fragment {
                 final LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
 
 
+                final NumberPicker numberPicker = new NumberPicker(getActivity());
+                numberPicker.setMaxValue(daysInMonth);
+                numberPicker.setMinValue(1);
+
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                /*
-                builder.setTitle("Title");
-                final EditText input = new EditText(getContext());
-                input.setInputType(InputType.TYPE_CLASS_TEXT);
-                builder.setView(input);
+                builder.setTitle("Pick a date for the event");
+                builder.setView(numberPicker);
 
-                final EditText input2 = new EditText(getContext());
-                input.setInputType(InputType.TYPE_CLASS_TEXT);
-                builder.setView(input2);
-*/
 
-                builder.setTitle("TITLE");
-                builder.setMessage("TEXT");
-
-                // Set an EditText view to get user input
-                final EditText email = new EditText(getContext());
-                email.setHint("EMAIL_HINT");
-                final EditText password = new EditText(getContext());
-                password.setHint("PASSWORD_HINT");
-                LinearLayout layout = new LinearLayout(getContext());
-                layout.setOrientation(LinearLayout.VERTICAL);
-                layout.addView(email);
-                layout.addView(password);
-                builder.setView(layout);
-
-                DatePicker picker = new DatePicker(getContext());
-                picker.setCalendarViewShown(false);
-
-                builder.setTitle("Create Year");
-                builder.setView(picker);
 
                 // Set up the buttons
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //noteText = input.getText().toString();
-                        //noteTextsArray[0]=noteText;
-                        //addViewToLayout(V, myLayout,noteText);
+                    int day = (numberPicker.getValue());
+                    EventText(relativeLayout, view, day);
                     }
                 });
 
@@ -208,6 +195,104 @@ public class SecondFragment extends Fragment {
         return view;
 
     }
+
+
+    public void EventText(final RelativeLayout relativeLayout, final View view, final int day)
+    {
+        AlertDialog.Builder builder2 = new AlertDialog.Builder(getContext());
+        builder2.setTitle("Enter event name");
+        final EditText input = new EditText(getContext());
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder2.setView(input);
+
+
+
+        // Set up the buttons
+        builder2.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                    eventText = input.getText().toString();
+                    AddEventToTimeline(eventText, relativeLayout, view, day);
+            }
+        });
+
+        builder2.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder2.show();
+    }
+
+    public void AddDatesToTimeline(View view, RelativeLayout relativeLayout, int eventDay)
+    {
+        final Calendar c = Calendar.getInstance();
+        int yy = c.get(Calendar.YEAR);
+        int mm = c.get(Calendar.MONTH);
+        int dd = c.get(Calendar.DAY_OF_MONTH);
+        final int daysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int prevTextViewId = 0;
+
+        for (int i = 0; i <daysInMonth; i++   )
+        {
+            final TextView textv = new TextView(view.getContext());
+
+            textv.setText((i+1)+"."+ mm);
+            textv.setTextColor(Color.BLACK);
+
+            int curTextViewId = prevTextViewId + 1;
+            textv.setId(curTextViewId);
+
+            final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            params.addRule(RelativeLayout.RIGHT_OF, prevTextViewId);
+
+            //if (curTextViewId > 1)
+            // {params.leftMargin=140;}
+
+            if(i == (eventDay-1))
+            {
+                textv.setWidth(350);
+
+            }
+            else
+            {textv.setWidth(200);}
+            textv.setHeight(50);
+            textv.setGravity(Gravity.CENTER);
+            textv.setBackgroundResource(R.drawable.date_timeline);
+            textv.setLayoutParams(params);
+
+            prevTextViewId = curTextViewId;
+            relativeLayout.addView(textv, params);
+        }
+    }
+
+
+    public void AddEventToTimeline(String text, RelativeLayout relativeLayout, View view, int day)
+    {
+
+        final TextView textv = new TextView(view.getContext());
+        final RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        params2.addRule(RelativeLayout.BELOW, day);
+        params2.addRule(RelativeLayout.ALIGN_START, day);
+        //params2.addRule(RelativeLayout.RIGHT_OF, 31);
+
+       // params2.leftMargin=10;
+
+        textv.setText(text);
+        textv.setLayoutParams(params2);
+        textv.setHeight(100);
+        textv.setGravity(Gravity.CENTER);
+        textv.setBackgroundResource(R.drawable.timeline_note);
+
+        relativeLayout.addView(textv, params2);
+
+        AddDatesToTimeline(view, relativeLayout, day);
+    }
+
+
 
     @Override
     public void onAttach(Context context) {
