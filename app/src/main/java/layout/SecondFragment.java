@@ -195,6 +195,7 @@ public class SecondFragment extends Fragment {
             if (Sundays.contains(i))
             {
                 textv.setBackgroundResource(R.drawable.date_timeline_sunday);
+
             }
             else
             {textv.setBackgroundResource(R.drawable.date_timeline);}
@@ -208,6 +209,8 @@ public class SecondFragment extends Fragment {
             prevTextViewId = curTextViewId;
             relativeLayout.addView(textv, params);
         }
+
+        AddSundayTextview(relativeLayout, view);
 
 
 
@@ -288,7 +291,7 @@ public class SecondFragment extends Fragment {
         builder2.show();
     }
 
-    public void AddDatesToTimeline(View view, RelativeLayout relativeLayout, int eventDay)
+    public void AddDatesToTimeline(View view, RelativeLayout relativeLayout)
     {
         final Calendar c = Calendar.getInstance();
         int yy = c.get(Calendar.YEAR);
@@ -312,9 +315,15 @@ public class SecondFragment extends Fragment {
 
             final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-            params.addRule(RelativeLayout.RIGHT_OF, prevTextViewId);
 
 
+
+            if (Sundays.contains(i))
+            {
+                textv.setBackgroundResource(R.drawable.date_timeline_sunday);
+            }
+            else
+            {textv.setBackgroundResource(R.drawable.date_timeline);}
 
 
                 //if(i == (eventDay-1))
@@ -336,11 +345,10 @@ public class SecondFragment extends Fragment {
 
 
 
-
+            params.addRule(RelativeLayout.RIGHT_OF, prevTextViewId);
 
             textv.setHeight(50);
             textv.setGravity(Gravity.CENTER);
-            textv.setBackgroundResource(R.drawable.date_timeline);
             textv.setLayoutParams(params);
 
             prevTextViewId = curTextViewId;
@@ -379,10 +387,45 @@ public class SecondFragment extends Fragment {
         eventDays.add(day);
         eventSizes.add(textWidth);
 
-        AddDatesToTimeline(view, relativeLayout, day);
+        AddDatesToTimeline(view, relativeLayout);
+    }
+
+    public void AddSundayTextview(RelativeLayout relativeLayout, View view)
+    {
+/*
+        final TextView textvSunday = new TextView(view.getContext());
+        textvSunday.setBackgroundResource(R.drawable.date_timeline_sunday);
+        params.addRule(RelativeLayout.BELOW, i);
+        params.addRule(RelativeLayout.ALIGN_START, i);
+        textvSunday.setTextSize(15);
+        textvSunday.setLayoutParams(params);
+        textvSunday.setHeight(100);
+        textvSunday.setGravity(Gravity.CENTER);
+        relativeLayout.addView(textvSunday, params);
+        */
+        final Calendar c = Calendar.getInstance();
+        int yy = c.get(Calendar.YEAR);
+        int mm = c.get(Calendar.MONTH);
+        int dd = c.get(Calendar.DAY_OF_MONTH);
+        final int daysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int prevTextViewId = 0;
+        int sizePicker = 0;
 
 
+        for (int i = 0; i <daysInMonth; i++   )
+        {
+            if (Sundays.contains(i))
+            {
+                final TextView textvSunday = new TextView(view.getContext());
+                final RelativeLayout.LayoutParams paramsSunday = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                paramsSunday.addRule(RelativeLayout.BELOW, i);
+                paramsSunday.addRule(RelativeLayout.ALIGN_START, i);
 
+                textvSunday.setLayoutParams(paramsSunday);
+                textvSunday.setHeight(800);
+                relativeLayout.addView(textvSunday, paramsSunday);
+            }
+        }
     }
 
 

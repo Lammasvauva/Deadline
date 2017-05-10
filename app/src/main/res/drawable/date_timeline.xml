@@ -4,11 +4,11 @@
         android:width="1dp"
         android:color="@color/common_border_color" />
 
-    <solid android:color="#C0C0C0" />
+    <solid android:color="#FFFFFF" />
 
     <padding
         android:left="1dp"
         android:right="1dp"
-        android:top="1dp" />
+        android:top="0dp" />
 
 </shape>
