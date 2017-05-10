@@ -1,7 +1,9 @@
 package layout;
 
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -10,11 +12,15 @@ import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
@@ -59,7 +65,7 @@ public class SecondFragment extends Fragment {
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setTitle(null);
 
-        View V = inflater.inflate(R.layout.fragment_second, container, false);
+        final View V = inflater.inflate(R.layout.fragment_second, container, false);
         compactcalendar_view = (CompactCalendarView) V.findViewById(R.id.compactcalendar_view);
         compactcalendar_view.setUseThreeLetterAbbreviation(true);
 
@@ -67,6 +73,74 @@ public class SecondFragment extends Fragment {
         compactcalendar_view.addEvent(ev1);
         Event ev2 = new Event(Color.RED, 1350039556000L, "Teachers' Professional Day");
         compactcalendar_view.addEvent(ev2);
+
+
+
+        Button clickButton = (Button) V.findViewById(R.id.AddEventButton_calendar);
+        //Add text button
+        clickButton.setOnClickListener(new View.OnClickListener() {
+
+            //  EditText et = (EditText) view.findViewById(R.id.addTextLine1);
+
+            @Override
+            //Put button functionality here
+            public void onClick(View v) {
+                //find LinearLayout of mainActivity for some reason
+                //Works only here, not in it's own method, no idea why
+                final LinearLayout myLayout = (LinearLayout) V.findViewById(R.id.linearlayout);
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                /*
+                builder.setTitle("Title");
+                final EditText input = new EditText(getContext());
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+
+                final EditText input2 = new EditText(getContext());
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input2);
+*/
+
+                builder.setTitle("TITLE");
+                builder.setMessage("TEXT");
+
+                // Set an EditText view to get user input
+                final EditText email = new EditText(getContext());
+                email.setHint("EMAIL_HINT");
+                final EditText password = new EditText(getContext());
+                password.setHint("PASSWORD_HINT");
+                LinearLayout layout = new LinearLayout(getContext());
+                layout.setOrientation(LinearLayout.VERTICAL);
+                layout.addView(email);
+                layout.addView(password);
+                builder.setView(layout);
+
+                DatePicker picker = new DatePicker(getContext());
+                picker.setCalendarViewShown(false);
+
+                builder.setTitle("Create Year");
+                builder.setView(picker);
+
+                // Set up the buttons
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //noteText = input.getText().toString();
+                        //noteTextsArray[0]=noteText;
+                        //addViewToLayout(V, myLayout,noteText);
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+            }
+        });
 
         compactcalendar_view.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override

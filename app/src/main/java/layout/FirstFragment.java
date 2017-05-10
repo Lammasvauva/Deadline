@@ -89,6 +89,8 @@ public class FirstFragment extends Fragment {
         final LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
 
 
+
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         //Reset TextViews-list
