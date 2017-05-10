@@ -13,6 +13,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.util.AttributeSet;
+import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +23,20 @@ import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
+import org.xmlpull.v1.XmlPullParser;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import d4.deadline.R;
@@ -57,37 +65,91 @@ public class SecondFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setTitle(null);
+        actionBar.setTitle("Timeline");
 
-        final View V = inflater.inflate(R.layout.fragment_second, container, false);
-        compactcalendar_view = (CompactCalendarView) V.findViewById(R.id.compactcalendar_view);
-        compactcalendar_view.setUseThreeLetterAbbreviation(true);
+        final View view = inflater.inflate(R.layout.fragment_second, container, false);
+        //compactcalendar_view = (CompactCalendarView) V.findViewById(R.id.compactcalendar_view);
+        //compactcalendar_view.setUseThreeLetterAbbreviation(true);
 
-        Event ev1 = new Event(Color.RED, 1349866756000L, "Teachers' Professional Day");
-        compactcalendar_view.addEvent(ev1);
-        Event ev2 = new Event(Color.RED, 1350039556000L, "Teachers' Professional Day");
-        compactcalendar_view.addEvent(ev2);
+       // Event ev1 = new Event(Color.RED, 1349866756000L, "Teachers' Professional Day");
+       // compactcalendar_view.addEvent(ev1);
+        //Event ev2 = new Event(Color.RED, 1350039556000L, "Teachers' Professional Day");
+        //compactcalendar_view.addEvent(ev2);
+
+        final RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.RelativeLayout);
+
+        //relativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        /*
+        XmlPullParser parser = R.layout.timeline_relative;
+        AttributeSet attributes = Xml.asAttributeSet(parser);
+        RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(view.getContext(),)
+        */
+
+
+        //params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+        //params.leftMargin = 107;
 
 
 
-        Button clickButton = (Button) V.findViewById(R.id.AddEventButton_calendar);
+
+
+        final Calendar c = Calendar.getInstance();
+        int yy = c.get(Calendar.YEAR);
+        int mm = c.get(Calendar.MONTH);
+        int dd = c.get(Calendar.DAY_OF_MONTH);
+        int daysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        int margin = 0;
+        List<TextView> TextViews = new ArrayList<TextView>();
+
+
+        int prevTextViewId = 0;
+
+        for (int i = 0; i <daysInMonth; i++   )
+        {
+            final TextView textv = new TextView(view.getContext());
+
+            textv.setText((i+1)+"."+ mm);
+            textv.setTextColor(Color.BLACK);
+
+            int curTextViewId = prevTextViewId + 1;
+            textv.setId(curTextViewId);
+
+            final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            params.addRule(RelativeLayout.RIGHT_OF, prevTextViewId);
+
+            if (curTextViewId > 1)
+            {params.leftMargin=50;}
+
+
+            textv.setLayoutParams(params);
+
+            prevTextViewId = curTextViewId;
+            relativeLayout.addView(textv, params);
+        }
+
+
+
+
+
+        Button clickButton = (Button) view.findViewById(R.id.AddEventButton_calendar);
         //Add text button
         clickButton.setOnClickListener(new View.OnClickListener() {
-
-            //  EditText et = (EditText) view.findViewById(R.id.addTextLine1);
-
             @Override
             //Put button functionality here
             public void onClick(View v) {
                 //find LinearLayout of mainActivity for some reason
                 //Works only here, not in it's own method, no idea why
-                final LinearLayout myLayout = (LinearLayout) V.findViewById(R.id.linearlayout);
+                final LinearLayout myLayout = (LinearLayout) view.findViewById(R.id.linearlayout);
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -142,27 +204,8 @@ public class SecondFragment extends Fragment {
             }
         });
 
-        compactcalendar_view.setListener(new CompactCalendarView.CompactCalendarViewListener() {
-            @Override
-            public void onDayClick(Date dateClicked) {
-                Context context = getActivity().getApplicationContext();
 
-                if (dateClicked.toString().compareTo("Fri Oct 21 00:00:00 AST 2016") == 0) {
-                    Toast.makeText(context, "Teachers' Professional Day", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(context, "No Events Planned for that day", Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
-
-            @Override
-            public void onMonthScroll(Date firstDayOfNewMonth) {
-                actionBar.setTitle(dateFormatMonth.format(firstDayOfNewMonth));
-            }
-        });
-
-        return V;
+        return view;
 
     }
 

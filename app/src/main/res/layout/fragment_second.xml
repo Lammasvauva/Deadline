@@ -1,36 +1,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingRight="16dp"
+    android:orientation="horizontal"
     android:paddingLeft="16dp"
-    android:orientation="vertical"
-    tools:targetApi="11"
-    tools:context="layout.SecondFragment">
+    android:paddingRight="16dp"
+    tools:context="layout.SecondFragment"
+    tools:targetApi="11">
 
     <!-- TODO: Update blank fragment layout -->
-    <com.github.sundeepk.compactcalendarview.CompactCalendarView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/compactcalendar_view"
-        android:layout_width="fill_parent"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:layout_height="250dp"
-        app:compactCalendarTargetHeight="250dp"
-        app:compactCalendarTextSize="12sp"
-        app:compactCalendarBackgroundColor="#fff"
-        app:compactCalendarTextColor="#ffe95451"
-        app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
-        app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
-        app:compactCalendarMultiEventIndicatorColor="#fff"
-        />
 
-    <Button
-        android:id="@+id/AddEventButton_calendar"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Event" />
+        android:layout_height="match_parent">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:layout_height="423dp">
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout"
+                android:layout_width="350dp"
+                android:layout_height="match_parent">
+
+            </RelativeLayout>
+        </HorizontalScrollView>
+
+        <Button
+            android:id="@+id/AddEventButton_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:text="Add Event" />
+
+    </FrameLayout>
 
 
 </LinearLayout>
